@@ -1,0 +1,10 @@
+[speaker_0]: Hello!
+[speaker_1]: आ   था।   [laughing]   मंदार   राव।
+[speaker_0]: तू   भी   बोल   क्या   तेरे,   high   कैसे   हो   लोग   बच्चों?
+[speaker_2]: मुझे   मराठी   नहीं   आती।
+[speaker_0]: हिंदी   में   बोलें,   हिंदी   में   बोल।
+[speaker_2]: मेरा   नाम   नविश   है।   मुझे-
+[speaker_1]: ये   project   पे   भरोसा   नहीं   है।   [laughing]
+[speaker_2]: मुझे,   मैं   बहुत   बीमार   हूं।   [laughing]
+[speaker_0]: मदद   करो।   [laughing]
+[speaker_2]: Please   help   me.   [laughing]

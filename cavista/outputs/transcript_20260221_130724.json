@@ -1,0 +1,16 @@
+{
+  "timestamp": "20260221_130724",
+  "audio_file": "C:/Users/Roshani/OneDrive/Desktop/cavista/Cavista-Hackathon-2026/cavista/convo1.mp3",
+  "speakers": [
+    "speaker_0"
+  ],
+  "utterances": [
+    {
+      "speaker": "speaker_0",
+      "start": 0.919,
+      "end": null,
+      "text": "Hi,   my   name   is   Roshni.   [background noise]"
+    }
+  ],
+  "plain_text": "[speaker_0]: Hi,   my   name   is   Roshni.   [background noise]"
+}

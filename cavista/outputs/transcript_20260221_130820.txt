@@ -1,0 +1,3 @@
+[speaker_0]: Hi,   Roshni.   What   are   your   symptoms?
+[speaker_1]: Uh,   hi,   doctor.   Uh,   I'm   suffering   from   headache,   and   I'm   feeling   nauseous   as   well.
+[speaker_0]: Okay,   Roshni.

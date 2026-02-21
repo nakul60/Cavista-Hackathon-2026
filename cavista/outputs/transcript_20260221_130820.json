@@ -1,0 +1,29 @@
+{
+  "timestamp": "20260221_130820",
+  "audio_file": "C:/Users/Roshani/OneDrive/Desktop/cavista/Cavista-Hackathon-2026/cavista/convo.mp3",
+  "speakers": [
+    "speaker_1",
+    "speaker_0"
+  ],
+  "utterances": [
+    {
+      "speaker": "speaker_0",
+      "start": 0.419,
+      "end": 3.159,
+      "text": "Hi,   Roshni.   What   are   your   symptoms?"
+    },
+    {
+      "speaker": "speaker_1",
+      "start": 3.019,
+      "end": 9.44,
+      "text": "Uh,   hi,   doctor.   Uh,   I'm   suffering   from   headache,   and   I'm   feeling   nauseous   as   well."
+    },
+    {
+      "speaker": "speaker_0",
+      "start": 9.18,
+      "end": null,
+      "text": "Okay,   Roshni."
+    }
+  ],
+  "plain_text": "[speaker_0]: Hi,   Roshni.   What   are   your   symptoms?\n[speaker_1]: Uh,   hi,   doctor.   Uh,   I'm   suffering   from   headache,   and   I'm   feeling   nauseous   as   well.\n[speaker_0]: Okay,   Roshni."
+}

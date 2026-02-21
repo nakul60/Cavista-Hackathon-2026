@@ -1,0 +1,72 @@
+{
+  "timestamp": "20260221_130623",
+  "audio_file": "C:/Users/Roshani/OneDrive/Desktop/cavista/Cavista-Hackathon-2026/cavista/convo2.mp3",
+  "speakers": [
+    "speaker_2",
+    "speaker_1",
+    "speaker_0"
+  ],
+  "utterances": [
+    {
+      "speaker": "speaker_0",
+      "start": 0.5,
+      "end": 1.339,
+      "text": "Hello!"
+    },
+    {
+      "speaker": "speaker_1",
+      "start": 1.279,
+      "end": 5.419,
+      "text": "\u0906   \u0925\u093e\u0964   [laughing]   \u092e\u0902\u0926\u093e\u0930   \u0930\u093e\u0935\u0964"
+    },
+    {
+      "speaker": "speaker_0",
+      "start": 5.32,
+      "end": 10.44,
+      "text": "\u0924\u0942   \u092d\u0940   \u092c\u094b\u0932   \u0915\u094d\u092f\u093e   \u0924\u0947\u0930\u0947,   high   \u0915\u0948\u0938\u0947   \u0939\u094b   \u0932\u094b\u0917   \u092c\u091a\u094d\u091a\u094b\u0902?"
+    },
+    {
+      "speaker": "speaker_2",
+      "start": 10.26,
+      "end": 11.899,
+      "text": "\u092e\u0941\u091d\u0947   \u092e\u0930\u093e\u0920\u0940   \u0928\u0939\u0940\u0902   \u0906\u0924\u0940\u0964"
+    },
+    {
+      "speaker": "speaker_0",
+      "start": 11.599,
+      "end": 13.759,
+      "text": "\u0939\u093f\u0902\u0926\u0940   \u092e\u0947\u0902   \u092c\u094b\u0932\u0947\u0902,   \u0939\u093f\u0902\u0926\u0940   \u092e\u0947\u0902   \u092c\u094b\u0932\u0964"
+    },
+    {
+      "speaker": "speaker_2",
+      "start": 13.52,
+      "end": 16.739,
+      "text": "\u092e\u0947\u0930\u093e   \u0928\u093e\u092e   \u0928\u0935\u093f\u0936   \u0939\u0948\u0964   \u092e\u0941\u091d\u0947-"
+    },
+    {
+      "speaker": "speaker_1",
+      "start": 16.68,
+      "end": 18.799,
+      "text": "\u092f\u0947   project   \u092a\u0947   \u092d\u0930\u094b\u0938\u093e   \u0928\u0939\u0940\u0902   \u0939\u0948\u0964   [laughing]"
+    },
+    {
+      "speaker": "speaker_2",
+      "start": 18.38,
+      "end": 22.359,
+      "text": "\u092e\u0941\u091d\u0947,   \u092e\u0948\u0902   \u092c\u0939\u0941\u0924   \u092c\u0940\u092e\u093e\u0930   \u0939\u0942\u0902\u0964   [laughing]"
+    },
+    {
+      "speaker": "speaker_0",
+      "start": 22.02,
+      "end": 24.099,
+      "text": "\u092e\u0926\u0926   \u0915\u0930\u094b\u0964   [laughing]"
+    },
+    {
+      "speaker": "speaker_2",
+      "start": 23.78,
+      "end": null,
+      "text": "Please   help   me.   [laughing]"
+    }
+  ],
+  "plain_text": "[speaker_0]: Hello!\n[speaker_1]: \u0906   \u0925\u093e\u0964   [laughing]   \u092e\u0902\u0926\u093e\u0930   \u0930\u093e\u0935\u0964\n[speaker_0]: \u0924\u0942   \u092d\u0940   \u092c\u094b\u0932   \u0915\u094d\u092f\u093e   \u0924\u0947\u0930\u0947,   high   \u0915\u0948\u0938\u0947   \u0939\u094b   \u0932\u094b\u0917   \u092c\u091a\u094d\u091a\u094b\u0902?\n[speaker_2]: \u092e\u0941\u091d\u0947   \u092e\u0930\u093e\u0920\u0940   \u0928\u0939\u0940\u0902   \u0906\u0924\u0940\u0964\n[speaker_0]: \u0939\u093f\u0902\u0926\u0940   \u092e\u0947\u0902   \u092c\u094b\u0932\u0947\u0902,   \u0939\u093f\u0902\u0926\u0940   \u092e\u0947\u0902   \u092c\u094b\u0932\u0964\n[speaker_2]: \u092e\u0947\u0930\u093e   \u0928\u093e\u092e   \u0928\u0935\u093f\u0936   \u0939\u0948\u0964   \u092e\u0941\u091d\u0947-\n[speaker_1]: \u092f\u0947   project   \u092a\u0947   \u092d\u0930\u094b\u0938\u093e   \u0928\u0939\u0940\u0902   \u0939\u0948\u0964   [laughing]\n[speaker_2]: \u092e\u0941\u091d\u0947,   \u092e\u0948\u0902   \u092c\u0939\u0941\u0924   \u092c\u0940\u092e\u093e\u0930   \u0939\u0942\u0902\u0964   [laughing]\n[speaker_0]: \u092e\u0926\u0926   \u0915\u0930\u094b\u0964   [laughing]\n[speaker_2]: Please   help   me.   [laughing]"
+}
