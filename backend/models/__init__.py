@@ -1,4 +1,4 @@
-from backend.models.emr import EMR
-from backend.models.user import User
+from .emr import EMR
+from .user import User
 
 __all__ = ['EMR', 'User']
