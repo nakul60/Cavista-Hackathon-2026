@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import PatientInput from "./pages/PatientInput";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -27,6 +28,7 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
+
         <Route
           path="/register"
           element={<Register onRegister={handleLogin} />}
@@ -42,6 +44,18 @@ function App() {
               <Navigate to="/login" />
             )
           }
+        />
+        <Route
+          path="/patient-input"
+          element={<PatientInput onLogout={handleLogout} />}
+          // Temporarily allowing without auth for testing
+          // element={
+          //   isAuthenticated ? (
+          //     <PatientInput onLogout={handleLogout} />
+          //   ) : (
+          //     <Navigate to="/login" />
+          //   )
+          // }
         />
       </Routes>
     </Router>
