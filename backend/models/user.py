@@ -1,4 +1,4 @@
-from backend import db
+from __init__ import db
 from datetime import datetime
 
 class User(db.Model):

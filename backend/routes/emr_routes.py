@@ -1,8 +1,8 @@
 from flask import Blueprint, request, jsonify, current_app, render_template_string
 import json
 import os
-from backend.models.emr import EMR
-from backend import db
+from models.emr import EMR
+from __init__ import db
 
 emr_bp = Blueprint('emr', __name__)
 
