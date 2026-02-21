@@ -23,7 +23,9 @@ const Dashboard = ({ onLogout }) => {
   };
 
   const handleNewConsultation = (type) => {
-    console.log("New consultation:", type);
+    console.log("New consultation type:", type);
+    // The QuickActions component now handles navigation
+    // This callback can be used for logging or analytics
   };
 
   const containerVariants = {

@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import MainLayout from "../components/layout/MainLayout";
 import Button from "../components/common/Button";
 import Card from "../components/common/Card";
-import TextInput from "../components/common/TextInput";
 import { Upload, Mic, ArrowLeft } from "lucide-react";
 
 const PatientInput = ({ onLogout }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [user] = useState({
     name: "Patient",
     email: "patient@example.com",
@@ -17,7 +17,6 @@ const PatientInput = ({ onLogout }) => {
   const [inputMode, setInputMode] = useState(null);
   const [audioFile, setAudioFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
-
   const [formData, setFormData] = useState({
     q1: "",
     q2: "",
@@ -25,8 +24,14 @@ const PatientInput = ({ onLogout }) => {
     q4: "",
     q5: "",
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Auto-select consultation type from navigation state
+  useEffect(() => {
+    if (location.state?.consultationType) {
+      setInputMode(location.state.consultationType);
+    }
+  }, [location.state]);
 
   const questions = [
     {
