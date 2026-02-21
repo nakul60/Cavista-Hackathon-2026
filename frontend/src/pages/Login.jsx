@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../components/auth/LoginForm";
+import MainLayout from "../components/layout/MainLayout";
 import { Zap, Shield, Brain } from "lucide-react";
 
 const Login = ({ onLogin }) => {
@@ -54,7 +55,8 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-slate-50 to-slate-100 flex items-center justify-center p-4 relative overflow-hidden">
+    <MainLayout>
+      <div className="bg-gradient-to-br from-white via-slate-50 to-slate-100 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background elements */}
       <motion.div
         className="absolute top-0 left-0 w-96 h-96 bg-primary-400/10 rounded-full blur-3xl"
@@ -81,7 +83,7 @@ const Login = ({ onLogin }) => {
                 <span className="text-white font-bold text-2xl">H</span>
               </div>
               <span className="text-3xl font-bold text-primary-700">
-                HealthOS
+                medScript
               </span>
             </div>
             <h1 className="text-5xl font-bold text-gray-900 mb-4 leading-tight">
@@ -130,7 +132,8 @@ const Login = ({ onLogin }) => {
           </div>
         </motion.div>
       </div>
-    </div>
+      </div>
+    </MainLayout>
   );
 };
 
