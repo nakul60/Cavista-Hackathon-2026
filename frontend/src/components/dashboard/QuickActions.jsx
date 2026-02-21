@@ -13,14 +13,14 @@ const QuickActions = ({ onNewConsultation }) => {
       icon: Mic,
       title: "Voice Consultation",
       description: "Record patient symptoms via voice",
-      color: "from-blue-500 to-cyan-500",
+      color: "from-forest to-forest-mid",
     },
     {
       id: "text",
       icon: Type,
       title: "Text Consultation",
       description: "Enter patient data manually",
-      color: "from-purple-500 to-pink-500",
+      color: "from-forest-deep to-forest",
     },
   ];
 
@@ -54,10 +54,10 @@ const QuickActions = ({ onNewConsultation }) => {
       animate="visible"
     >
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">
+        <h2 className="text-2xl font-bold text-text-ink mb-4">
           Start New Consultation
         </h2>
-        <p className="text-gray-600">
+        <p className="text-text-slate">
           Choose how you would like to input patient data
         </p>
       </div>
@@ -85,16 +85,16 @@ const QuickActions = ({ onNewConsultation }) => {
                     >
                       <Icon size={28} className="text-white" />
                     </div>
-                    <ArrowRight className="w-6 h-6 text-primary-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <ArrowRight className="w-6 h-6 text-forest opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  <h3 className="text-xl font-bold text-text-ink mb-2">
                     {action.title}
                   </h3>
-                  <p className="text-gray-600 text-sm mb-4">
+                  <p className="text-text-slate text-sm mb-4">
                     {action.description}
                   </p>
                   <motion.button
-                    className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold text-sm transition-colors"
+                    className="inline-flex items-center gap-2 text-forest hover:text-forest-deep font-semibold text-sm transition-colors"
                     whileHover={{ x: 5 }}
                   >
                     <span>Get Started</span>

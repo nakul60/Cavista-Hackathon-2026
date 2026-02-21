@@ -4,7 +4,7 @@ import Button from "../common/Button.jsx";
 import { Mail, Lock, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
-const LoginForm = ({ onSubmit, isLoading = false }) => {
+const LoginForm = ({ onSubmit, isLoading = false, errorMessage = "" }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -90,6 +90,15 @@ const LoginForm = ({ onSubmit, isLoading = false }) => {
           required
         />
       </motion.div>
+
+      {errorMessage ? (
+        <motion.div
+          variants={itemVariants}
+          className="mb-5 px-4 py-3 rounded-lg bg-[var(--red-light)] text-[var(--red)] border border-[var(--red)] text-sm"
+        >
+          {errorMessage}
+        </motion.div>
+      ) : null}
 
       <motion.div variants={itemVariants} className="mb-6">
         <motion.a

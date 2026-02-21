@@ -2,23 +2,49 @@ import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+
+const resolveRole = (userPayload = {}) => {
+  const candidate =
+    userPayload.role ||
+    userPayload.user_role ||
+    userPayload.userType ||
+    userPayload.type ||
+    "";
+
+  return String(candidate).toLowerCase();
+};
 
 const Navbar = ({ user, onLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const authUser = useSelector((state) => state.auth.user);
+  const activeUser = user || authUser;
+  const role = resolveRole(activeUser || {});
 
-  const navItems = [
-    { label: "Dashboard", path: "/profile" },
-    { label: "Consultations", path: "/consultations" },
-    { label: "Patients", path: "/patients" },
-    { label: "Settings", path: "/settings" },
-  ];
+  const navItems = activeUser
+    ? role === "doctor"
+      ? [
+          { label: "Review", path: "/doctor/review/1045" },
+          { label: "Report", path: "/report/1045" },
+          { label: "Profile", path: "/profile" },
+        ]
+      : [
+          { label: "Dashboard", path: "/dashboard" },
+          { label: "Upload", path: "/upload" },
+          { label: "Profile", path: "/profile" },
+        ]
+    : [
+        { label: "Home", path: "/" },
+        { label: "Login", path: "/login" },
+        { label: "Register", path: "/register" },
+      ];
 
   const isActive = (path) => location.pathname === path;
 
   return (
     <motion.nav
-      className="bg-forest-deep border-b border-border sticky top-0 z-50 shadow-sm"
+      className="bg-[var(--green-deep)] border-b border-[var(--border)] sticky top-0 z-50 shadow-sm"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
@@ -29,7 +55,7 @@ const Navbar = ({ user, onLogout }) => {
           className="flex items-center gap-3 cursor-pointer"
           whileHover={{ scale: 1.05 }}
         >
-          <div className="w-10 h-10 bg-forest-mid rounded-full flex items-center justify-center">
+          <div className="w-10 h-10 bg-[var(--green-mid)] rounded-full flex items-center justify-center">
             <span className="text-white font-bold text-xl">M</span>
           </div>
           <span className="text-xl font-bold text-white">MedScript</span>
@@ -42,15 +68,15 @@ const Navbar = ({ user, onLogout }) => {
               <motion.div
                 className={`relative pb-2 font-semibold transition-colors duration-300 ${
                   isActive(item.path)
-                    ? "text-forest-tint"
-                    : "text-white hover:text-forest-tint"
+                    ? "text-[var(--green-tint)]"
+                    : "text-white hover:text-[var(--green-tint)]"
                 }`}
                 whileHover={{ x: 5 }}
               >
                 {item.label}
                 {isActive(item.path) && (
                   <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-forest-tint"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--green-tint)]"
                     layoutId="navbar-indicator"
                     transition={{ duration: 0.3 }}
                   />
@@ -61,16 +87,18 @@ const Navbar = ({ user, onLogout }) => {
         </div>
 
         {/* User Menu - Just Logout Button */}
-        <div className="hidden md:flex items-center gap-4">
-          <motion.button
-            onClick={onLogout}
-            className="px-6 py-2.5 bg-forest-mid text-white font-semibold rounded-xl hover:bg-forest hover:shadow-lg transition-all"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Logout
-          </motion.button>
-        </div>
+        {activeUser && typeof onLogout === "function" ? (
+          <div className="hidden md:flex items-center gap-4">
+            <motion.button
+              onClick={onLogout}
+              className="px-6 py-2.5 bg-[var(--green-mid)] text-white font-semibold rounded-xl hover:bg-[var(--green)] transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Logout
+            </motion.button>
+          </div>
+        ) : null}
 
         {/* Mobile Menu Button */}
         <motion.button
@@ -85,7 +113,7 @@ const Navbar = ({ user, onLogout }) => {
       {/* Mobile Menu */}
       {isOpen && (
         <motion.div
-          className="md:hidden bg-forest-deep p-4 border-t border-forest-border"
+          className="md:hidden bg-[var(--green-deep)] p-4 border-t border-[var(--border)]"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
@@ -100,8 +128,8 @@ const Navbar = ({ user, onLogout }) => {
                 <motion.div
                   className={`py-2 px-4 rounded-lg transition-colors ${
                     isActive(item.path)
-                      ? "bg-forest-mid text-white"
-                      : "text-forest-tint hover:text-white hover:bg-forest-mid"
+                      ? "bg-[var(--green-mid)] text-white"
+                      : "text-[var(--green-tint)] hover:text-white hover:bg-[var(--green-mid)]"
                   }`}
                   whileHover={{ x: 5 }}
                 >
