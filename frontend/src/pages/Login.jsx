@@ -1,23 +1,75 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import LoginForm from "../components/auth/LoginForm";
 import MainLayout from "../components/layout/MainLayout";
 import { Zap, Shield, Brain } from "lucide-react";
+import { setAuth } from "../store/authSlice";
 
-const Login = ({ onLogin }) => {
+const resolveRole = (payload = {}, userPayload = {}) => {
+  const candidate =
+    userPayload.role ||
+    userPayload.user_role ||
+    userPayload.userType ||
+    userPayload.type ||
+    payload.role ||
+    payload.user_role ||
+    payload.userType ||
+    payload.type ||
+    "";
+
+  return String(candidate).toLowerCase();
+};
+
+const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [authError, setAuthError] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogin = async (formData) => {
     setIsLoading(true);
+    setAuthError("");
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      console.log("Login data:", formData);
-      if (onLogin) {
-        onLogin();
-        navigate("/profile");
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.message || "Invalid credentials");
       }
+
+      const user = data.user || {
+        full_name: data.full_name,
+        email: data.email,
+        role: data.role || data.user_role || data.userType || data.type,
+      };
+      const token = data.token || data.access_token || null;
+      const normalizedRole = resolveRole(data, user);
+
+      const normalizedUser = {
+        ...user,
+        role: normalizedRole || user?.role || data.role || data.user_role || "patient",
+      };
+
+      dispatch(setAuth({ user: normalizedUser, token }));
+
+      if (normalizedRole === "doctor") {
+        navigate("/doctor/review/1045");
+      } else {
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      setAuthError(error.message || "Invalid credentials");
     } finally {
       setIsLoading(false);
     }
@@ -56,15 +108,15 @@ const Login = ({ onLogin }) => {
 
   return (
     <MainLayout>
-      <div className="bg-gradient-to-br from-white via-slate-50 to-slate-100 flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="bg-[var(--bg-page)] flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background elements */}
       <motion.div
-        className="absolute top-0 left-0 w-96 h-96 bg-primary-400/10 rounded-full blur-3xl"
+        className="absolute top-0 left-0 w-96 h-96 bg-[var(--green-tint)]/60 rounded-full blur-3xl"
         animate={{ y: [0, 50, 0] }}
         transition={{ duration: 8, repeat: Infinity }}
       />
       <motion.div
-        className="absolute bottom-0 right-0 w-96 h-96 bg-secondary-400/10 rounded-full blur-3xl"
+        className="absolute bottom-0 right-0 w-96 h-96 bg-[var(--gold-light)]/60 rounded-full blur-3xl"
         animate={{ y: [0, -50, 0] }}
         transition={{ duration: 8, repeat: Infinity, delay: 1 }}
       />
@@ -79,17 +131,17 @@ const Login = ({ onLogin }) => {
         >
           <motion.div variants={itemVariants} className="mb-12">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-2xl">H</span>
+              <div className="w-12 h-12 bg-[var(--green-mid)] rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-xl">M</span>
               </div>
-              <span className="text-3xl font-bold text-primary-700">
-                medScript
+              <span className="text-3xl font-bold text-[var(--green-deep)]" style={{ fontFamily: "var(--font-heading)" }}>
+                MedScript
               </span>
             </div>
-            <h1 className="text-5xl font-bold text-gray-900 mb-4 leading-tight">
+            <h1 className="text-5xl font-bold text-[var(--text-ink)] mb-4 leading-tight" style={{ fontFamily: "var(--font-heading)" }}>
               Smart EMR & Diagnostic Assistant
             </h1>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-[var(--text-slate)]">
               Empowering doctors with AI-driven diagnostic support for better
               patient outcomes
             </p>
@@ -105,14 +157,14 @@ const Login = ({ onLogin }) => {
                   className="flex gap-4"
                   whileHover={{ x: 10 }}
                 >
-                  <div className="w-12 h-12 bg-gradient-to-r from-primary-100 to-secondary-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Icon className="text-primary-600 w-6 h-6" />
+                  <div className="w-12 h-12 bg-[var(--green-tint)] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon className="text-[var(--green-deep)] w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                    <h3 className="text-lg font-semibold text-[var(--text-ink)] mb-1">
                       {feature.title}
                     </h3>
-                    <p className="text-gray-600">{feature.description}</p>
+                    <p className="text-[var(--text-slate)]">{feature.description}</p>
                   </div>
                 </motion.div>
               );
@@ -128,7 +180,11 @@ const Login = ({ onLogin }) => {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <div className="w-full">
-            <LoginForm onSubmit={handleLogin} isLoading={isLoading} />
+            <LoginForm
+              onSubmit={handleLogin}
+              isLoading={isLoading}
+              errorMessage={authError}
+            />
           </div>
         </motion.div>
       </div>

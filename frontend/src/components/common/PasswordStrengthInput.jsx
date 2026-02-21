@@ -83,7 +83,7 @@ const PasswordStrengthInput = ({
       {/* Strength bar */}
       <div className="mb-3">
         <div className="flex items-center gap-2 mb-2">
-          <div className="flex-1 h-2 bg-slate-700/50 rounded-full overflow-hidden">
+          <div className="flex-1 h-2 bg-clinical-parchment rounded-full overflow-hidden">
             <motion.div
               className={`h-full ${strength.color}`}
               initial={{ width: 0 }}
@@ -91,7 +91,7 @@ const PasswordStrengthInput = ({
               transition={{ duration: 0.3 }}
             />
           </div>
-          <span className="text-xs font-semibold text-slate-400">
+          <span className="text-xs font-semibold text-text-ash">
             {strength.level}
           </span>
         </div>
@@ -113,11 +113,11 @@ const PasswordStrengthInput = ({
               transition={{ delay: index * 0.05 }}
             >
               {req.met ? (
-                <Check className="w-4 h-4 text-green-400" />
+                <Check className="w-4 h-4 text-vital-green" />
               ) : (
-                <X className="w-4 h-4 text-slate-500" />
+                <X className="w-4 h-4 text-text-ash" />
               )}
-              <span className={req.met ? "text-slate-300" : "text-slate-500"}>
+              <span className={req.met ? "text-text-slate" : "text-text-ash"}>
                 {req.label}
               </span>
             </motion.div>
@@ -127,7 +127,7 @@ const PasswordStrengthInput = ({
 
       {error && (
         <motion.p
-          className="text-red-400 text-sm mt-2"
+          className="text-alert-red text-sm mt-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >

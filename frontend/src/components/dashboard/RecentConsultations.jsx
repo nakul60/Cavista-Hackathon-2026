@@ -58,10 +58,10 @@ const RecentConsultations = ({ consultations = [] }) => {
       animate="visible"
     >
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+        <h2 className="text-2xl font-bold text-text-ink mb-2">
           Recent Consultations
         </h2>
-        <p className="text-gray-600">Your latest patient consultations</p>
+        <p className="text-text-slate">Your latest patient consultations</p>
       </div>
 
       <div className="space-y-3">
@@ -72,23 +72,23 @@ const RecentConsultations = ({ consultations = [] }) => {
               className="flex items-center justify-between p-4 cursor-pointer"
             >
               <div className="flex items-center gap-4 flex-1">
-                <div className="w-12 h-12 bg-gradient-to-r from-primary-600 to-primary-500 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-r from-forest-deep to-forest rounded-xl flex items-center justify-center">
                   <User size={24} className="text-white" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-gray-900 font-semibold">
+                  <p className="text-text-ink font-semibold">
                     {consultation.patientName}
                   </p>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-text-slate">
                     {consultation.diagnosis}
                   </p>
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-sm text-primary-600 font-semibold">
+                <p className="text-sm text-forest font-semibold">
                   {consultation.status}
                 </p>
-                <p className="text-xs text-gray-600 flex items-center gap-1 justify-end mt-1">
+                <p className="text-xs text-text-slate flex items-center gap-1 justify-end mt-1">
                   <Calendar size={14} />
                   {consultation.date}
                 </p>
@@ -99,8 +99,8 @@ const RecentConsultations = ({ consultations = [] }) => {
       </div>
 
       <motion.button
-        className="w-full mt-4 py-3 px-4 bg-white hover:bg-gray-50 text-primary-600 font-semibold rounded-xl transition-colors border border-gray-200 hover:border-primary-200 shadow-sm"
-        whileHover={{ backgroundColor: "rgba(247, 249, 248, 1)" }}
+        className="w-full mt-4 py-3 px-4 bg-clinical-warm-white hover:bg-clinical-parchment text-forest font-semibold rounded-xl transition-colors border border-border hover:border-forest-border shadow-sm"
+        whileHover={{ backgroundColor: "rgba(237, 233, 227, 1)" }}
         whileTap={{ scale: 0.98 }}
       >
         View All Consultations

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Medical Form{% endblock %}
+
+{% block content %}
+
+<section class="text-consult">
+
+<a href="/consult" class="back">← Back</a>
+
+<h1>Medical Information Form</h1>
+
+<form method="POST">
+
+{% set questions = [
+("Q1: Tell us about yourself","Enter your name, age and main problem."),
+("Q2: Describe your main problem","Explain pain, severity, location."),
+("Q3: Any other symptoms or changes?","Mention fever, nausea, dizziness etc."),
+("Q4: Medical history","Existing conditions, surgeries, meds."),
+("Q5: Lifestyle","Work, stress, habits.")
+] %}
+
+{% for q,help in questions %}
+<div class="q-box">
+    <h3>{{ q }}</h3>
+    <p>{{ help }}</p>
+    <textarea rows="4" name="q{{ loop.index }}" placeholder="Enter your answer here..."></textarea>
+</div>
+{% endfor %}
+
+<div class="form-actions">
+    <a href="/consult" class="btn-outline">Cancel</a>
+    <button class="btn-primary">Submit Consultation</button>
+</div>
+
+</form>
+
+{% endblock %}

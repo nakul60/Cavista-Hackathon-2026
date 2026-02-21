@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Stethoscope, Users, BarChart3, Clock } from "lucide-react";
 import Card from "../common/Card.jsx";
-import Button from "../common/Button.jsx";
 
 const DashboardStats = ({ stats = [] }) => {
   const defaultStats = [
@@ -62,21 +61,21 @@ const DashboardStats = ({ stats = [] }) => {
         return (
           <motion.div key={index} variants={itemVariants}>
             <Card hover className="relative overflow-hidden group">
-              <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-forest/20 to-forest-mid/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="flex items-start justify-between mb-4 relative z-10">
                 <div>
-                  <p className="text-gray-600 text-sm font-semibold mb-2">
+                  <p className="text-text-slate text-sm font-semibold mb-2">
                     {stat.label}
                   </p>
-                  <p className="text-3xl font-bold text-gray-900">
+                  <p className="text-3xl font-bold text-text-ink">
                     {stat.value}
                   </p>
                 </div>
-                <div className={`p-3 bg-gray-100 rounded-xl ${stat.color}`}>
+                <div className={`p-3 bg-clinical-parchment rounded-xl ${stat.color}`}>
                   <Icon size={24} />
                 </div>
               </div>
-              <p className="text-xs text-primary-600 font-semibold">
+              <p className="text-xs text-forest font-semibold">
                 {stat.change}
               </p>
             </Card>

@@ -33,7 +33,7 @@ const Footer = () => {
 
   return (
     <motion.footer
-      className="bg-clinical-parchment border-t border-border mt-20"
+      className="bg-[var(--bg-subtle)] border-t border-[var(--border)] mt-20"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.5 }}
@@ -49,14 +49,14 @@ const Footer = () => {
           {/* Brand */}
           <motion.div variants={itemVariants} className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-forest-deep rounded-full flex items-center justify-center">
+              <div className="w-12 h-12 bg-[var(--green-deep)] rounded-full flex items-center justify-center">
                 <Heart className="text-white w-6 h-6" />
               </div>
-              <span className="text-2xl font-bold text-forest-deep">
+              <span className="text-2xl font-bold text-[var(--green-deep)]" style={{ fontFamily: "var(--font-heading)" }}>
                 MedScript
               </span>
             </div>
-            <p className="text-text-slate text-sm">
+            <p className="text-[var(--text-slate)] text-sm">
               Smart EMR & Diagnostic Assistant powered by AI for better
               healthcare.
             </p>
@@ -64,13 +64,13 @@ const Footer = () => {
 
           {/* Links */}
           <motion.div variants={itemVariants} className="flex flex-col gap-4">
-            <h3 className="text-lg font-bold text-text-ink">Quick Links</h3>
+            <h3 className="text-lg font-bold text-[var(--text-ink)]">Quick Links</h3>
             <div className="flex flex-col gap-2">
               {footerLinks.map((link) => (
                 <motion.a
                   key={link.label}
                   href={link.href}
-                  className="text-text-slate hover:text-forest transition-colors text-sm"
+                  className="text-[var(--text-slate)] hover:text-[var(--green)] transition-colors text-sm"
                   whileHover={{ x: 5 }}
                 >
                   {link.label}
@@ -81,7 +81,7 @@ const Footer = () => {
 
           {/* Social */}
           <motion.div variants={itemVariants} className="flex flex-col gap-4">
-            <h3 className="text-lg font-bold text-text-ink">Follow Us</h3>
+            <h3 className="text-lg font-bold text-[var(--text-ink)]">Follow Us</h3>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <motion.a
@@ -89,7 +89,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-clinical-parchment hover:bg-forest-mid rounded-lg flex items-center justify-center text-text-slate hover:text-white transition-all duration-300"
+                  className="w-10 h-10 bg-[var(--bg-card)] hover:bg-[var(--green-mid)] rounded-lg flex items-center justify-center text-[var(--text-slate)] hover:text-white transition-all duration-300"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   whileTap={{ scale: 0.9 }}
                   title={social.label}
@@ -102,11 +102,11 @@ const Footer = () => {
         </motion.div>
 
         {/* Divider */}
-        <motion.div className="h-px bg-gradient-to-r from-transparent via-primary-300 to-transparent my-8" />
+  <motion.div className="h-px bg-gradient-to-r from-transparent via-[var(--border)] to-transparent my-8" />
 
         {/* Copyright */}
         <motion.div
-          className="flex flex-col md:flex-row items-center justify-between gap-4 text-gray-600 text-sm"
+          className="flex flex-col md:flex-row items-center justify-between gap-4 text-[var(--text-slate)] text-sm"
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
@@ -114,7 +114,7 @@ const Footer = () => {
         >
           <p>© {currentYear} medScript. All rights reserved.</p>
           <p className="flex items-center gap-2">
-            Built with <Heart className="w-4 h-4 text-red-500" /> for better
+            Built with <Heart className="w-4 h-4 text-alert-red" /> for better
             healthcare
           </p>
         </motion.div>

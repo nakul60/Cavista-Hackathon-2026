@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
 import TextInput from "../common/TextInput.jsx";
 import Button from "../common/Button.jsx";
-import { Mail, Lock, User, Phone, ArrowRight, CheckCircle } from "lucide-react";
+import { Mail, Lock, User, ArrowRight, CheckCircle } from "lucide-react";
 import { useState } from "react";
 
-const RegisterForm = ({ onSubmit, isLoading = false }) => {
+const RegisterForm = ({ onSubmit, isLoading = false, errorMessage = "" }) => {
   const [formData, setFormData] = useState({
-    name: "",
+    full_name: "",
     email: "",
-    phone: "",
     password: "",
     confirmPassword: "",
+    role: "patient",
   });
   const [errors, setErrors] = useState({});
 
@@ -32,9 +32,8 @@ const RegisterForm = ({ onSubmit, isLoading = false }) => {
     e.preventDefault();
     const newErrors = {};
 
-    if (!formData.name) newErrors.name = "Full name is required";
+    if (!formData.full_name) newErrors.full_name = "Full name is required";
     if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.phone) newErrors.phone = "Phone number is required";
     if (!formData.password) newErrors.password = "Password is required";
     if (formData.password.length < 6)
       newErrors.password = "Password must be at least 6 characters";
@@ -48,10 +47,10 @@ const RegisterForm = ({ onSubmit, isLoading = false }) => {
     }
 
     onSubmit({
-      name: formData.name,
+      full_name: formData.full_name,
       email: formData.email,
-      phone: formData.phone,
       password: formData.password,
+      role: formData.role,
     });
   };
 
@@ -88,12 +87,12 @@ const RegisterForm = ({ onSubmit, isLoading = false }) => {
       <motion.div variants={itemVariants} className="space-y-4 mb-8">
         <TextInput
           label="Full Name"
-          name="name"
+          name="full_name"
           placeholder="Dr. John Doe"
           type="text"
-          value={formData.name}
+          value={formData.full_name}
           onChange={handleChange}
-          error={errors.name}
+          error={errors.full_name}
           icon={User}
           required
         />
@@ -108,17 +107,20 @@ const RegisterForm = ({ onSubmit, isLoading = false }) => {
           icon={Mail}
           required
         />
-        <TextInput
-          label="Phone Number"
-          name="phone"
-          placeholder="+1 (555) 000-0000"
-          type="tel"
-          value={formData.phone}
-          onChange={handleChange}
-          error={errors.phone}
-          icon={Phone}
-          required
-        />
+        <div>
+          <label className="block text-sm font-semibold text-text-slate mb-2">
+            Role
+          </label>
+          <select
+            name="role"
+            value={formData.role}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded-lg border border-border bg-clinical-warm-white text-text-ink focus:outline-none focus:ring-2 focus:ring-forest-border"
+          >
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+          </select>
+        </div>
         <TextInput
           label="Password"
           name="password"
@@ -142,6 +144,15 @@ const RegisterForm = ({ onSubmit, isLoading = false }) => {
           required
         />
       </motion.div>
+
+      {errorMessage ? (
+        <motion.div
+          variants={itemVariants}
+          className="mb-5 px-4 py-3 rounded-lg bg-[var(--red-light)] text-[var(--red)] border border-[var(--red)] text-sm"
+        >
+          {errorMessage}
+        </motion.div>
+      ) : null}
 
       <motion.div variants={itemVariants} className="mb-6">
         <div className="flex items-start gap-3">

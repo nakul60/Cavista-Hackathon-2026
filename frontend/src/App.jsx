@@ -1,48 +1,114 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import { useState } from "react";
-import Home from "./pages/Home";
+import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
+import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
-import PatientInput from "./pages/PatientInput";
+import ProfilePage from "./pages/ProfilePage";
+import UploadAudioPage from "./pages/UploadAudioPage";
+import ValidateSummaryPage from "./pages/ValidateSummaryPage";
+import ThankYouPage from "./pages/ThankYouPage";
+import EMRReviewPage from "./pages/EMRReviewPage";
+import ReportPage from "./pages/ReportPage";
+import PatientDashboardPage from "./pages/PatientDashboardPage";
+
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  void isAuthenticated;
+
+  // Route protection disabled for testing
+  // if (!isAuthenticated) {
+  //   return <Navigate to="/login" replace />;
+  // }
+
+  return children;
+};
+
+const RoleRoute = ({ children, allowedRole }) => {
+  const { user } = useSelector((state) => state.auth);
+  void user;
+  void allowedRole;
+
+  // Role protection disabled for testing
+  // const role = (user?.role || "").toLowerCase();
+  // if (allowedRole && role !== allowedRole) {
+  //   return <Navigate to={role === "doctor" ? "/doctor/review/1045" : "/dashboard"} replace />;
+  // }
+
+  return children;
+};
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const handleLogin = () => {
-    setIsAuthenticated(true);
-  };
-
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-  };
-
   return (
     <Router>
       <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-        <Route
-          path="/register"
-          element={<Register onRegister={handleLogin} />}
-        />
-
-        {/* Protected Routes */}
         <Route
           path="/profile"
-          element={<Dashboard onLogout={handleLogout} />}
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
         />
+
         <Route
-          path="/patient-input"
-          element={<PatientInput onLogout={handleLogout} />}
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <RoleRoute allowedRole="patient">
+                <PatientDashboardPage />
+              </RoleRoute>
+            </ProtectedRoute>
+          }
         />
+
+        <Route
+          path="/upload"
+          element={
+            <ProtectedRoute>
+              <RoleRoute allowedRole="patient">
+                <UploadAudioPage />
+              </RoleRoute>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/validate-summary"
+          element={
+            <ProtectedRoute>
+              <RoleRoute allowedRole="patient">
+                <ValidateSummaryPage />
+              </RoleRoute>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/thank-you"
+          element={
+            <ProtectedRoute>
+              <RoleRoute allowedRole="patient">
+                <ThankYouPage />
+              </RoleRoute>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/doctor/review/:visitId"
+          element={<EMRReviewPage />}
+        />
+
+        <Route
+          path="/report/:visitId"
+          element={<ReportPage />}
+        />
+
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );
