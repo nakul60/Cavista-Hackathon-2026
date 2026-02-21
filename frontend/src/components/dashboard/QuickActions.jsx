@@ -1,17 +1,22 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import Card from "../common/Card.jsx";
 import Button from "../common/Button.jsx";
 import { Mic, Type, Plus, ArrowRight } from "lucide-react";
 
 const QuickActions = ({ onNewConsultation }) => {
+  const navigate = useNavigate();
+
   const actions = [
     {
+      id: "voice",
       icon: Mic,
       title: "Voice Consultation",
       description: "Record patient symptoms via voice",
       color: "from-blue-500 to-cyan-500",
     },
     {
+      id: "text",
       icon: Type,
       title: "Text Consultation",
       description: "Enter patient data manually",
@@ -32,6 +37,15 @@ const QuickActions = ({ onNewConsultation }) => {
     visible: { opacity: 1, scale: 1 },
   };
 
+  const handleActionClick = (actionId) => {
+    // Call the callback if provided
+    if (onNewConsultation) {
+      onNewConsultation(actionId);
+    }
+    // Navigate to patient input page
+    navigate("/patient-input", { state: { consultationType: actionId } });
+  };
+
   return (
     <motion.div
       className="space-y-6"
@@ -49,13 +63,13 @@ const QuickActions = ({ onNewConsultation }) => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {actions.map((action, index) => {
+        {actions.map((action) => {
           const Icon = action.icon;
           return (
             <motion.div
-              key={index}
+              key={action.id}
               variants={itemVariants}
-              onClick={() => onNewConsultation(index === 0 ? "voice" : "text")}
+              onClick={() => handleActionClick(action.id)}
             >
               <Card
                 hover
