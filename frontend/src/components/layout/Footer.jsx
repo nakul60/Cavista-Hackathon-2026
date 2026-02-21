@@ -8,7 +8,7 @@ const Footer = () => {
     { icon: Github, href: "#", label: "GitHub" },
     { icon: Linkedin, href: "#", label: "LinkedIn" },
     { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Mail, href: "mailto:contact@healthos.com", label: "Email" },
+    { icon: Mail, href: "mailto:contact@medscript.com", label: "Email" },
   ];
 
   const footerLinks = [
@@ -112,7 +112,7 @@ const Footer = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <p>© {currentYear} HealthOS. All rights reserved.</p>
+          <p>© {currentYear} medScript. All rights reserved.</p>
           <p className="flex items-center gap-2">
             Built with <Heart className="w-4 h-4 text-red-500" /> for better
             healthcare

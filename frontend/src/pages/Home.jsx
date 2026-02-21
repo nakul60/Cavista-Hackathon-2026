@@ -161,11 +161,11 @@ const Home = () => {
           animate="visible"
         >
           <motion.div variants={itemVariants} className="mb-6">
-            <div className="inline-block px-4 py-2 bg-forest-tint border border-forest-border rounded-full">
+            {/* <div className="inline-block px-4 py-2 bg-forest-tint border border-forest-border rounded-full">
               <span className="text-forest-deep font-semibold text-sm">
                 🚀 AI-Powered Healthcare
               </span>
-            </div>
+            </div> */}
           </motion.div>
 
           <motion.h1

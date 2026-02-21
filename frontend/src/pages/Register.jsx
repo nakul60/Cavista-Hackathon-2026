@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RegisterForm from "../components/auth/RegisterForm";
+import MainLayout from "../components/layout/MainLayout";
 import { Star, Zap, Users } from "lucide-react";
 
 const Register = ({ onRegister }) => {
@@ -54,7 +55,8 @@ const Register = ({ onRegister }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-slate-50 to-slate-100 flex items-center justify-center p-4 relative overflow-hidden">
+    <MainLayout>
+      <div className="bg-gradient-to-br from-white via-slate-50 to-slate-100 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background elements */}
       <motion.div
         className="absolute top-0 left-0 w-96 h-96 bg-secondary-400/10 rounded-full blur-3xl"
@@ -152,7 +154,8 @@ const Register = ({ onRegister }) => {
           </div>
         </motion.div>
       </div>
-    </div>
+      </div>
+    </MainLayout>
   );
 };
 
