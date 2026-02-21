@@ -46,22 +46,29 @@
         <h2>Create Account</h2>
         <p>Join MedScript and start making better diagnoses</p>
 
-        <form method="POST">
+        <form method="POST" action="{{ url_for('auth.signup') }}">
 
             <label>Full Name *</label>
-            <input type="text" name="name" placeholder="Dr. John Doe" required>
+            <input type="text" name="full_name" placeholder="Dr. John Doe" required>
 
             <label>Email Address *</label>
             <input type="email" name="email" placeholder="doctor@example.com" required>
 
             <label>Phone Number *</label>
-            <input type="tel" name="phone" placeholder="+1 (555) 000-0000" required>
+            <input type="tel" name="phone_number" placeholder="+1 (555) 000-0000" required>
 
             <label>Password *</label>
             <input type="password" name="password" placeholder="Create a strong password" required>
 
             <label>Confirm Password *</label>
             <input type="password" name="confirm_password" placeholder="Confirm your password" required>
+
+            <label>Role *</label>
+            <select name="role" required>
+                <option value="">Select your role</option>
+                <option value="patient">Patient</option>
+                <option value="doctor">Doctor</option>
+            </select>
 
             <p class="terms">
                 ✓ By signing up, you agree to our Terms of Service and Privacy Policy
