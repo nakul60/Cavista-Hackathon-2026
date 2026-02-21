@@ -12,8 +12,8 @@
     </p>
 
     <div class="cta">
-        <a class="btn-primary">Get Started Now →</a>
-        <a class="btn-outline">Learn More</a>
+        <a href="{{ url_for('auth.signup') }}" class="btn-primary">Get Started Now →</a>
+        <a href="{{ url_for('auth.login') }}" class="btn-outline">Sign In</a>
     </div>
 
     <div class="stats">
@@ -72,8 +72,8 @@
     <p>Join thousands of doctors using MedScript</p>
 
     <div>
-        <a class="btn-primary">Get Started Free</a>
-        <a class="btn-outline">Sign In</a>
+        <a href="{{ url_for('auth.signup') }}" class="btn-primary">Get Started Free</a>
+        <a href="{{ url_for('auth.login') }}" class="btn-outline">Sign In</a>
     </div>
 </section>
 
