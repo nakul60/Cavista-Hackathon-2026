@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}MedScript{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-left">
+        <div class="logo">M</div>
+        <span class="brand">MedScript</span>
+    </div>
+
+    <div class="nav-right">
+        <a href="/login">Sign In</a>
+        <a href="/signup" class="btn-primary">Sign Up</a>
+    </div>
+</nav>
+
+{% block content %}{% endblock %}
+
+{% include "footer.html" %}
+
+</body>
+</html>
