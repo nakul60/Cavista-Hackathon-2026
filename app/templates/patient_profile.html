@@ -2,86 +2,66 @@
 {% block title %}Patient Profile{% endblock %}
 
 {% block content %}
-
 <section class="patient">
-
-<div class="patient-header">
-
-    <div>
-        <h1>{{ user_name }}</h1>
-        <p>ID: PT-1023 · Male · 45 yrs</p>
+    <div class="patient-header">
+        <div>
+            <h1><i class="fas fa-user-circle" style="color:#2e7d5b;"></i> {{ user_name }}</h1>
+            <p><i class="fas fa-id-card"></i> ID: PT-1023 · <i class="fas fa-venus-mars"></i> Male · 45 yrs</p>
+        </div>
+        <div class="patient-actions">
+            <a href="{{ url_for('emr_routes.consult_choice') }}" class="btn-primary"><i class="fas fa-stethoscope"></i> Start Consultation</a>
+            <a href="{{ url_for('auth.dashboard') }}" class="btn-outline"><i class="fas fa-arrow-left"></i> Back</a>
+        </div>
     </div>
 
-    <div class="patient-actions">
-        <a href="/consult" class="btn-primary">Start Consultation</a>
-        <a href="/dashboard" class="btn-outline">← Back</a>
+    <!-- BASIC INFO CARDS -->
+    <div class="patient-cards">
+        <div class="p-card">
+            <i class="fas fa-heartbeat" style="color:#2e7d5b;"></i>
+            <h4>Blood Pressure</h4>
+            <h2>130/85</h2>
+        </div>
+        <div class="p-card">
+            <i class="fas fa-heart" style="color:#2e7d5b;"></i>
+            <h4>Heart Rate</h4>
+            <h2>78 bpm</h2>
+        </div>
+        <div class="p-card">
+            <i class="fas fa-droplet" style="color:#2e7d5b;"></i>
+            <h4>Glucose</h4>
+            <h2>110 mg/dL</h2>
+        </div>
+        <div class="p-card">
+            <i class="fas fa-weight-scale" style="color:#2e7d5b;"></i>
+            <h4>BMI</h4>
+            <h2>24.3</h2>
+        </div>
     </div>
 
-</div>
-
-<!-- BASIC INFO -->
-
-<div class="patient-cards">
-
-<div class="p-card">
-    <h4>Blood Pressure</h4>
-    <h2>130/85</h2>
-</div>
-
-<div class="p-card">
-    <h4>Heart Rate</h4>
-    <h2>78 bpm</h2>
-</div>
-
-<div class="p-card">
-    <h4>Glucose</h4>
-    <h2>110 mg/dL</h2>
-</div>
-
-<div class="p-card">
-    <h4>BMI</h4>
-    <h2>24.3</h2>
-</div>
-
-</div>
-
-<!-- DETAILS -->
-
-<div class="patient-details">
-
-<div class="details-box">
-
-<h3>Basic Details</h3>
-
-<p><strong>Phone:</strong> +1 555 000 0000</p>
-<p><strong>Email:</strong> john@example.com</p>
-<p><strong>Condition:</strong> Hypertension</p>
-<p><strong>Last Visit:</strong> 20 Feb 2026</p>
-
-</div>
-
-<div class="details-box">
-
-<h3>Previous Reports</h3>
-
-{% set reports = [
-("Blood Test","18 Feb 2026"),
-("ECG","10 Feb 2026"),
-("MRI Scan","02 Feb 2026")
-] %}
-
-{% for r,d in reports %}
-<div class="report-row">
-    <span>{{ r }}</span>
-    <small>{{ d }}</small>
-    <a>View</a>
-</div>
-{% endfor %}
-
-</div>
-
-</div>
-
+    <!-- DETAILS -->
+    <div class="patient-details">
+        <div class="details-box">
+            <h3><i class="fas fa-address-card"></i> Basic Details</h3>
+            <p><strong><i class="fas fa-phone"></i> Phone:</strong> +1 555 000 0000</p>
+            <p><strong><i class="fas fa-envelope"></i> Email:</strong> john@example.com</p>
+            <p><strong><i class="fas fa-notes-medical"></i> Condition:</strong> Hypertension</p>
+            <p><strong><i class="fas fa-calendar-check"></i> Last Visit:</strong> 20 Feb 2026</p>
+        </div>
+        <div class="details-box">
+            <h3><i class="fas fa-file-alt"></i> Previous Reports</h3>
+            {% set reports = [
+                ("Blood Test", "18 Feb 2026", "fa-flask"),
+                ("ECG", "10 Feb 2026", "fa-heart-pulse"),
+                ("MRI Scan", "02 Feb 2026", "fa-mri")
+            ] %}
+            {% for r, d, icon in reports %}
+            <div class="report-row">
+                <span><i class="fas {{ icon }}"></i> {{ r }}</span>
+                <small>{{ d }}</small>
+                <a href="#"><i class="fas fa-eye"></i> View</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </section>
-
 {% endblock %}

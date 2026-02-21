@@ -2,28 +2,23 @@
 {% block title %}Consultation{% endblock %}
 
 {% block content %}
-
 <section class="consult">
-
-<a href="/dashboard" class="back">← Back to Dashboard</a>
-
-<h1>Patient Consultation Input</h1>
-<p>Choose how you would like to provide your medical information</p>
-
-<div class="consult-select">
-
-<a href="/consult/audio" class="consult-box">
-    <h3>🎙 Audio Upload</h3>
-    <p>Upload an audio recording of your consultation.</p>
-    <span>Get Started ⬆</span>
-</a>
-
-<a href="/consult/text" class="consult-box">
-    <h3>📝 Text Form</h3>
-    <p>Answer guided questions about symptoms.</p>
-    <span>Get Started ⬆</span>
-</a>
-
-</div>
-
+    <a href="{{ url_for('auth.dashboard') }}" class="back"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+    <h1>Patient Consultation Input</h1>
+    <p>Choose how you would like to provide your medical information</p>
+    <div class="consult-select">
+        <a href="{{ url_for('emr_routes.consult_audio') }}" class="consult-box">
+            <i class="fas fa-microphone-alt fa-3x" style="color:#2e7d5b;"></i>
+            <h3>Audio Upload</h3>
+            <p>Upload an audio recording of your consultation.</p>
+            <span class="btn-outline">Get Started <i class="fas fa-arrow-up"></i></span>
+        </a>
+        <a href="{{ url_for('emr_routes.consult_text') }}" class="consult-box">
+            <i class="fas fa-file-alt fa-3x" style="color:#2e7d5b;"></i>
+            <h3>Text Form</h3>
+            <p>Answer guided questions about symptoms.</p>
+            <span class="btn-outline">Get Started <i class="fas fa-arrow-right"></i></span>
+        </a>
+    </div>
+</section>
 {% endblock %}

@@ -2,90 +2,71 @@
 {% block title %}Create Account{% endblock %}
 
 {% block content %}
-
 <section class="signup-page">
-
-<div class="signup-container">
-
-    <!-- LEFT SIDE -->
-
-    <div class="signup-left">
-
-        <span class="badge">Join 1000+ Doctors</span>
-
-        <h1>Start Your Journey to<br>Better Diagnosis</h1>
-
-        <p>
-            Join the healthcare revolution with AI-powered diagnostic support
-        </p>
-
-        <ul class="feature-list">
-            <li>⭐ Premium Features – Access all AI diagnostic tools</li>
-            <li>👥 Patient Management – Unlimited patient records</li>
-            <li>⚡ Real-time Sync – Instant updates</li>
-        </ul>
-
-        <div class="signup-stats">
-            <div>
-                <h2>99.2%</h2>
-                <p>Accuracy</p>
-            </div>
-
-            <div>
-                <h2>24/7</h2>
-                <p>Support</p>
+    <div class="signup-container">
+        <!-- LEFT -->
+        <div class="signup-left">
+            <span class="badge"><i class="fas fa-user-md"></i> Join 1000+ Doctors</span>
+            <h1>Start Your Journey to<br>Better Diagnosis</h1>
+            <p>Join the healthcare revolution with AI-powered diagnostic support</p>
+            <ul class="feature-list">
+                <li><i class="fas fa-star" style="color:#2e7d5b;"></i> Premium Features – Access all AI diagnostic tools</li>
+                <li><i class="fas fa-users" style="color:#2e7d5b;"></i> Patient Management – Unlimited patient records</li>
+                <li><i class="fas fa-sync-alt" style="color:#2e7d5b;"></i> Real-time Sync – Instant updates</li>
+            </ul>
+            <div class="signup-stats">
+                <div>
+                    <h2>99.2%</h2>
+                    <p>Accuracy</p>
+                </div>
+                <div>
+                    <h2>24/7</h2>
+                    <p>Support</p>
+                </div>
             </div>
         </div>
-
+        <!-- RIGHT -->
+        <div class="signup-right">
+            <h2>Create Account</h2>
+            <p>Join MedScript and start making better diagnoses</p>
+            <form method="POST" action="{{ url_for('auth.signup') }}">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" name="full_name" placeholder="Dr. John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" name="email" placeholder="doctor@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" name="phone_number" placeholder="+1 (555) 000-0000" required>
+                </div>
+                <div class="form-group">
+                    <label>Password *</label>
+                    <input type="password" name="password" placeholder="Create a strong password" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password *</label>
+                    <input type="password" name="confirm_password" placeholder="Confirm your password" required>
+                </div>
+                <div class="form-group">
+                    <label>Role *</label>
+                    <select name="role" required>
+                        <option value="">Select your role</option>
+                        <option value="patient">Patient</option>
+                        <option value="doctor">Doctor</option>
+                    </select>
+                </div>
+                <p class="terms">
+                    <i class="fas fa-check-circle" style="color:#2e7d5b;"></i> By signing up, you agree to our Terms of Service and Privacy Policy
+                </p>
+                <button class="btn-primary full">Create Account <i class="fas fa-arrow-right"></i></button>
+                <p class="signup-text">
+                    Already have an account? <a href="/login">Sign in</a>
+                </p>
+            </form>
+        </div>
     </div>
-
-    <!-- RIGHT SIDE FORM -->
-
-    <div class="signup-right">
-
-        <h2>Create Account</h2>
-        <p>Join MedScript and start making better diagnoses</p>
-
-        <form method="POST" action="{{ url_for('auth.signup') }}">
-
-            <label>Full Name *</label>
-            <input type="text" name="full_name" placeholder="Dr. John Doe" required>
-
-            <label>Email Address *</label>
-            <input type="email" name="email" placeholder="doctor@example.com" required>
-
-            <label>Phone Number *</label>
-            <input type="tel" name="phone_number" placeholder="+1 (555) 000-0000" required>
-
-            <label>Password *</label>
-            <input type="password" name="password" placeholder="Create a strong password" required>
-
-            <label>Confirm Password *</label>
-            <input type="password" name="confirm_password" placeholder="Confirm your password" required>
-
-            <label>Role *</label>
-            <select name="role" required>
-                <option value="">Select your role</option>
-                <option value="patient">Patient</option>
-                <option value="doctor">Doctor</option>
-            </select>
-
-            <p class="terms">
-                ✓ By signing up, you agree to our Terms of Service and Privacy Policy
-            </p>
-
-            <button class="btn-primary full">Create Account →</button>
-
-            <p class="signup-text">
-                Already have an account? <a href="/login">Sign in</a>
-            </p>
-
-        </form>
-
-    </div>
-
-</div>
-
 </section>
-
 {% endblock %}
