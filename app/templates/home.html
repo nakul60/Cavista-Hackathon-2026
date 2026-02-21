@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Home | MedScript{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <h1>Smart EMR & <span>Diagnostic Assistant</span></h1>
+
+    <p>
+        Empower your medical practice with AI-driven diagnostic support.
+        Accurate predictions. Faster consultations. Better patient outcomes.
+    </p>
+
+    <div class="cta">
+        <a class="btn-primary">Get Started Now →</a>
+        <a class="btn-outline">Learn More</a>
+    </div>
+
+    <div class="stats">
+        <div>
+            <h2>99.2%</h2>
+            <p>Accuracy</p>
+        </div>
+        <div>
+            <h2>1000+</h2>
+            <p>Active Users</p>
+        </div>
+        <div>
+            <h2>50K+</h2>
+            <p>Consultations</p>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <h2>Powerful Features</h2>
+
+    <div class="grid">
+
+        {% set cards = [
+            ("AI-Powered Diagnosis","Advanced ML models powered by ClinicalBERT"),
+            ("Real-time Consultation","Voice and text input for patient recording"),
+            ("HIPAA Compliant","Enterprise-grade encryption"),
+            ("Lightning Fast","Instant diagnostic results"),
+            ("Advanced Analytics","Detailed insights and metrics"),
+            ("Patient Management","Unlimited patient records")
+        ] %}
+
+        {% for title,desc in cards %}
+        <div class="card">
+            <h3>{{ title }}</h3>
+            <p>{{ desc }}</p>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+<section class="how">
+    <h2>How It Works</h2>
+
+    <div class="how-grid">
+        <div class="how-card">Primary Diagnosis</div>
+        <div class="how-card">Treatment Planning</div>
+        <div class="how-card">Patient Education</div>
+        <div class="how-card">ICD-10 Coding</div>
+    </div>
+</section>
+
+<section class="cta-box">
+    <h2>Ready to Transform Your Practice?</h2>
+    <p>Join thousands of doctors using MedScript</p>
+
+    <div>
+        <a class="btn-primary">Get Started Free</a>
+        <a class="btn-outline">Sign In</a>
+    </div>
+</section>
+
+{% endblock %}

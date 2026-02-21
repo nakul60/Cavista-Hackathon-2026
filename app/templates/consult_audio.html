@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Upload Audio{% endblock %}
+
+{% block content %}
+
+<section class="audio">
+
+<a href="/consult" class="back">← Back</a>
+
+<h1>Upload Audio Recording</h1>
+
+<form method="POST" enctype="multipart/form-data" class="audio-box">
+
+<input type="file" name="audio" accept=".mp3,.wav,.m4a">
+
+<div class="audio-actions">
+    <a href="/consult" class="btn-outline">Cancel</a>
+    <button class="btn-primary">Upload Recording</button>
+</div>
+
+</form>
+
+{% endblock %}
