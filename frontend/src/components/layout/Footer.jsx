@@ -33,7 +33,7 @@ const Footer = () => {
 
   return (
     <motion.footer
-      className="bg-gradient-to-b from-slate-50 to-white border-t border-gray-200 mt-20"
+      className="bg-clinical-parchment border-t border-border mt-20"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.5 }}
@@ -49,14 +49,14 @@ const Footer = () => {
           {/* Brand */}
           <motion.div variants={itemVariants} className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full flex items-center justify-center">
+              <div className="w-12 h-12 bg-forest-deep rounded-full flex items-center justify-center">
                 <Heart className="text-white w-6 h-6" />
               </div>
-              <span className="text-2xl font-bold text-primary-700">
-                HealthOS
+              <span className="text-2xl font-bold text-forest-deep">
+                MedScript
               </span>
             </div>
-            <p className="text-gray-600 text-sm">
+            <p className="text-text-slate text-sm">
               Smart EMR & Diagnostic Assistant powered by AI for better
               healthcare.
             </p>
@@ -64,13 +64,13 @@ const Footer = () => {
 
           {/* Links */}
           <motion.div variants={itemVariants} className="flex flex-col gap-4">
-            <h3 className="text-lg font-bold text-gray-900">Quick Links</h3>
+            <h3 className="text-lg font-bold text-text-ink">Quick Links</h3>
             <div className="flex flex-col gap-2">
               {footerLinks.map((link) => (
                 <motion.a
                   key={link.label}
                   href={link.href}
-                  className="text-gray-600 hover:text-primary-600 transition-colors text-sm"
+                  className="text-text-slate hover:text-forest transition-colors text-sm"
                   whileHover={{ x: 5 }}
                 >
                   {link.label}
@@ -81,7 +81,7 @@ const Footer = () => {
 
           {/* Social */}
           <motion.div variants={itemVariants} className="flex flex-col gap-4">
-            <h3 className="text-lg font-bold text-gray-900">Follow Us</h3>
+            <h3 className="text-lg font-bold text-text-ink">Follow Us</h3>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <motion.a
@@ -89,7 +89,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-100 hover:bg-primary-600 rounded-lg flex items-center justify-center text-gray-600 hover:text-white transition-all duration-300"
+                  className="w-10 h-10 bg-clinical-parchment hover:bg-forest-mid rounded-lg flex items-center justify-center text-text-slate hover:text-white transition-all duration-300"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   whileTap={{ scale: 0.9 }}
                   title={social.label}

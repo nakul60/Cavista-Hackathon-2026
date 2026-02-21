@@ -27,7 +27,7 @@ const Modal = ({ isOpen, onClose, title, children, actions, size = "md" }) => {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className={`bg-slate-800/80 backdrop-blur border border-primary-500/30 rounded-lg shadow-2xl w-full ${sizes[size]}`}
+              className={`bg-clinical-warm-white backdrop-blur border border-forest-border rounded-lg shadow-2xl w-full ${sizes[size]}`}
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
@@ -35,11 +35,11 @@ const Modal = ({ isOpen, onClose, title, children, actions, size = "md" }) => {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b border-primary-500/20">
-                <h2 className="text-xl font-bold text-white">{title}</h2>
+              <div className="flex items-center justify-between p-6 border-b border-border">
+                <h2 className="text-xl font-bold text-text-ink">{title}</h2>
                 <motion.button
                   onClick={onClose}
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-text-ash hover:text-text-ink transition-colors"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
@@ -52,7 +52,7 @@ const Modal = ({ isOpen, onClose, title, children, actions, size = "md" }) => {
 
               {/* Actions */}
               {actions && (
-                <div className="flex gap-3 p-6 border-t border-primary-500/20 justify-end">
+                <div className="flex gap-3 p-6 border-t border-border justify-end">
                   {actions}
                 </div>
               )}

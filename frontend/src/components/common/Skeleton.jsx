@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const Skeleton = ({ variant = "text", width = "w-full", height = "h-4" }) => {
   return (
     <motion.div
-      className={`${width} ${height} bg-slate-700 rounded-lg`}
+      className={`${width} ${height} bg-border rounded-lg`}
       animate={{
         backgroundPosition: ["200% center", "-200% center"],
       }}

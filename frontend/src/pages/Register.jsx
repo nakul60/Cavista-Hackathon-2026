@@ -11,13 +11,11 @@ const Register = ({ onRegister }) => {
   const handleRegister = async (formData) => {
     setIsLoading(true);
     try {
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
       console.log("Register data:", formData);
-      // Call parent onRegister to update auth state
       if (onRegister) {
         onRegister();
-        navigate("/dashboard");
+        navigate("/profile");
       }
     } finally {
       setIsLoading(false);

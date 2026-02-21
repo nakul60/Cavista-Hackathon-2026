@@ -10,28 +10,28 @@ const DashboardStats = ({ stats = [] }) => {
       label: "Total Patients",
       value: "248",
       change: "+12% this month",
-      color: "text-blue-400",
+      color: "text-forest",
     },
     {
       icon: Stethoscope,
       label: "Consultations",
       value: "1,234",
       change: "+8% this week",
-      color: "text-purple-400",
+      color: "text-forest-mid",
     },
     {
       icon: BarChart3,
       label: "Diagnosis Accuracy",
       value: "94.5%",
       change: "+2.1% improvement",
-      color: "text-green-400",
+      color: "text-vital-green",
     },
     {
       icon: Clock,
       label: "Avg. Consultation Time",
       value: "12m 45s",
       change: "-5% faster",
-      color: "text-orange-400",
+      color: "text-forest-mid",
     },
   ];
 

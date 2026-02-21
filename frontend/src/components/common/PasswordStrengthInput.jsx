@@ -13,9 +13,8 @@ const PasswordStrengthInput = ({
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
-  // Calculate password strength
   const calculateStrength = (password) => {
-    if (!password) return { score: 0, level: "weak", color: "bg-red-500" };
+    if (!password) return { score: 0, level: "weak", color: "bg-alert-red" };
 
     let score = 0;
     if (password.length >= 8) score++;
@@ -26,12 +25,12 @@ const PasswordStrengthInput = ({
     if (/[^a-zA-Z\d]/.test(password)) score++;
 
     const levels = [
-      { score: 1, level: "Very Weak", color: "bg-red-500" },
-      { score: 2, level: "Weak", color: "bg-red-400" },
-      { score: 3, level: "Fair", color: "bg-yellow-500" },
-      { score: 4, level: "Good", color: "bg-blue-500" },
-      { score: 5, level: "Strong", color: "bg-green-500" },
-      { score: 6, level: "Very Strong", color: "bg-green-600" },
+      { score: 1, level: "Very Weak", color: "bg-alert-red" },
+      { score: 2, level: "Weak", color: "bg-caution-amber" },
+      { score: 3, level: "Fair", color: "bg-forest-mid" },
+      { score: 4, level: "Good", color: "bg-forest" },
+      { score: 5, level: "Strong", color: "bg-vital-green" },
+      { score: 6, level: "Very Strong", color: "bg-forest-deep" },
     ];
 
     return levels[Math.min(score - 1, levels.length - 1)];
@@ -54,7 +53,7 @@ const PasswordStrengthInput = ({
       animate={{ opacity: 1, y: 0 }}
     >
       {label && (
-        <label className="block text-sm font-semibold text-slate-200 mb-2">
+        <label className="block text-sm font-semibold text-text-slate mb-2">
           {label}
         </label>
       )}
@@ -66,15 +65,15 @@ const PasswordStrengthInput = ({
             onChange(e);
             onStrengthChange?.(calculateStrength(e.target.value));
           }}
-          className={`w-full px-4 py-3 bg-slate-800/50 backdrop-blur border-2 border-primary-500/30 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-primary-500 focus:shadow-glow transition-all duration-300 pr-10 ${
-            error ? "border-secondary-500" : ""
+          className={`w-full px-4 py-3 bg-clinical-warm-white backdrop-blur border-2 border-border rounded-lg text-text-ink placeholder-text-ash focus:outline-none focus:border-forest focus:shadow-glow transition-all duration-300 pr-10 ${
+            error ? "border-alert-red" : ""
           } ${className}`}
           {...props}
         />
         <motion.button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-primary-400 transition-colors"
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-ash hover:text-forest transition-colors"
           whileHover={{ scale: 1.1 }}
         >
           {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}

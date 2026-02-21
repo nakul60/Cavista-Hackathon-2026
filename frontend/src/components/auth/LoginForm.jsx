@@ -62,8 +62,8 @@ const LoginForm = ({ onSubmit, isLoading = false }) => {
       animate="visible"
     >
       <motion.div variants={itemVariants} className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">Welcome Back</h1>
-        <p className="text-gray-600">Sign in to your HealthOS account</p>
+        <h1 className="text-4xl font-bold text-text-ink mb-2">Welcome Back</h1>
+        <p className="text-text-slate">Sign in to your MedScript account</p>
       </motion.div>
 
       <motion.div variants={itemVariants} className="space-y-5 mb-8">
@@ -94,7 +94,7 @@ const LoginForm = ({ onSubmit, isLoading = false }) => {
       <motion.div variants={itemVariants} className="mb-6">
         <motion.a
           href="/forgot-password"
-          className="text-primary-400 hover:text-primary-300 text-sm font-semibold transition-colors"
+          className="text-forest hover:text-forest-deep font-semibold transition-colors text-sm"
           whileHover={{ x: 5 }}
         >
           Forgot password?
@@ -116,11 +116,11 @@ const LoginForm = ({ onSubmit, isLoading = false }) => {
       </motion.div>
 
       <motion.div variants={itemVariants} className="mt-6 text-center">
-        <p className="text-slate-400 text-sm">
+        <p className="text-text-slate text-sm">
           Don't have an account?{" "}
           <motion.a
             href="/register"
-            className="text-primary-400 hover:text-primary-300 font-semibold transition-colors"
+            className="text-forest hover:text-forest-deep font-semibold transition-colors"
             whileHover={{ scale: 1.05 }}
           >
             Sign up

@@ -77,11 +77,11 @@ const RegisterForm = ({ onSubmit, isLoading = false }) => {
       animate="visible"
     >
       <motion.div variants={itemVariants} className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">
+        <h1 className="text-4xl font-bold text-text-ink mb-2">
           Create Account
         </h1>
-        <p className="text-gray-600">
-          Join HealthOS and start making better diagnoses
+        <p className="text-text-slate">
+          Join MedScript and start making better diagnoses
         </p>
       </motion.div>
 
@@ -145,8 +145,8 @@ const RegisterForm = ({ onSubmit, isLoading = false }) => {
 
       <motion.div variants={itemVariants} className="mb-6">
         <div className="flex items-start gap-3">
-          <CheckCircle className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" />
-          <p className="text-slate-400 text-sm">
+          <CheckCircle className="w-5 h-5 text-forest-mid mt-1 flex-shrink-0" />
+          <p className="text-text-ash text-sm">
             By signing up, you agree to our Terms of Service and Privacy Policy
           </p>
         </div>
@@ -167,11 +167,11 @@ const RegisterForm = ({ onSubmit, isLoading = false }) => {
       </motion.div>
 
       <motion.div variants={itemVariants} className="mt-6 text-center">
-        <p className="text-slate-400 text-sm">
+        <p className="text-text-slate text-sm">
           Already have an account?{" "}
           <motion.a
             href="/login"
-            className="text-primary-400 hover:text-primary-300 font-semibold transition-colors"
+            className="text-forest hover:text-forest-deep font-semibold transition-colors"
             whileHover={{ scale: 1.05 }}
           >
             Sign in

@@ -9,8 +9,8 @@ const Card = ({
   ...props
 }) => {
   const baseClass =
-    "bg-white border border-gray-100 rounded-2xl p-6 transition-all duration-300 shadow-sm";
-  const hoverClass = hover ? "hover:border-primary-200 hover:shadow-lg" : "";
+    "bg-clinical-warm-white border border-border rounded-2xl p-6 transition-all duration-300 shadow-sm";
+  const hoverClass = hover ? "hover:border-forest-border hover:shadow-lg" : "";
 
   const Wrapper = animated ? motion.div : "div";
   const animProps = animated
@@ -19,7 +19,7 @@ const Card = ({
         animate: { opacity: 1, y: 0 },
         transition: { duration: 0.3 },
         whileHover: hover
-          ? { y: -5, boxShadow: "0 20px 25px -5px rgba(126, 211, 33, 0.1)" }
+          ? { y: -5, boxShadow: "0 20px 25px -5px rgba(45, 106, 79, 0.15)" }
           : {},
       }
     : {};

@@ -22,7 +22,7 @@ const SearchBox = ({
       <div
         className={`relative flex items-center transition-all duration-300 ${isFocused ? "scale-105" : ""}`}
       >
-        <Search className="absolute left-4 text-primary-400 w-5 h-5 pointer-events-none" />
+        <Search className="absolute left-4 text-forest w-5 h-5 pointer-events-none" />
         <input
           type="text"
           placeholder={placeholder}
@@ -30,13 +30,13 @@ const SearchBox = ({
           onChange={onChange}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          className="w-full pl-12 pr-12 py-3 bg-slate-800/50 backdrop-blur border-2 border-primary-500/30 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-primary-500 focus:shadow-glow transition-all duration-300"
+          className="w-full pl-12 pr-12 py-3 bg-clinical-warm-white backdrop-blur border-2 border-border rounded-lg text-text-ink placeholder-text-ash focus:outline-none focus:border-forest focus:shadow-glow transition-all duration-300"
         />
         {value && (
           <motion.button
             type="button"
             onClick={() => onChange({ target: { value: "" } })}
-            className="absolute right-4 text-slate-400 hover:text-primary-400 transition-colors"
+            className="absolute right-4 text-text-ash hover:text-forest transition-colors"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
@@ -46,7 +46,7 @@ const SearchBox = ({
       </div>
       {isFocused && (
         <motion.div
-          className="absolute inset-0 border-2 border-primary-500 rounded-lg pointer-events-none"
+          className="absolute inset-0 border-2 border-forest rounded-lg pointer-events-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.3 }}
           exit={{ opacity: 0 }}
