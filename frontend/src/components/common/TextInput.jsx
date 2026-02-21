@@ -28,7 +28,7 @@ const TextInput = ({
       {label && (
         <label className="block text-sm font-semibold text-text-slate mb-2">
           {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
+          {required && <span className="text-alert-red ml-1">*</span>}
         </label>
       )}
       <div className="relative">

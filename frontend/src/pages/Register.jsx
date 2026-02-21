@@ -5,19 +5,34 @@ import RegisterForm from "../components/auth/RegisterForm";
 import MainLayout from "../components/layout/MainLayout";
 import { Star, Zap, Users } from "lucide-react";
 
-const Register = ({ onRegister }) => {
+const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [authError, setAuthError] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async (formData) => {
     setIsLoading(true);
+    setAuthError("");
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      console.log("Register data:", formData);
-      if (onRegister) {
-        onRegister();
-        navigate("/profile");
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.message || "Registration failed");
       }
+
+      navigate("/login");
+    } catch (error) {
+      setAuthError(error.message || "Registration failed");
     } finally {
       setIsLoading(false);
     }
@@ -56,15 +71,15 @@ const Register = ({ onRegister }) => {
 
   return (
     <MainLayout>
-      <div className="bg-gradient-to-br from-white via-slate-50 to-slate-100 flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="bg-[var(--bg-page)] flex items-center justify-center p-4 relative overflow-hidden">
       {/* Animated background elements */}
       <motion.div
-        className="absolute top-0 left-0 w-96 h-96 bg-secondary-400/10 rounded-full blur-3xl"
+        className="absolute top-0 left-0 w-96 h-96 bg-[var(--green-tint)]/60 rounded-full blur-3xl"
         animate={{ y: [0, 50, 0] }}
         transition={{ duration: 8, repeat: Infinity }}
       />
       <motion.div
-        className="absolute bottom-0 right-0 w-96 h-96 bg-primary-400/10 rounded-full blur-3xl"
+        className="absolute bottom-0 right-0 w-96 h-96 bg-[var(--gold-light)]/60 rounded-full blur-3xl"
         animate={{ y: [0, -50, 0] }}
         transition={{ duration: 8, repeat: Infinity, delay: 1 }}
       />
@@ -78,15 +93,15 @@ const Register = ({ onRegister }) => {
           animate="visible"
         >
           <motion.div variants={itemVariants} className="mb-12">
-            <div className="inline-block px-4 py-2 bg-primary-100 border border-primary-300 rounded-full mb-6">
-              <span className="text-primary-700 font-semibold text-sm">
+            <div className="inline-block px-4 py-2 bg-[var(--green-tint)] border border-[var(--green-border)] rounded-full mb-6">
+              <span className="text-[var(--green-deep)] font-semibold text-sm">
                 Join 1000+ Doctors
               </span>
             </div>
-            <h1 className="text-5xl font-bold text-gray-900 mb-4 leading-tight">
+            <h1 className="text-5xl font-bold text-[var(--text-ink)] mb-4 leading-tight" style={{ fontFamily: "var(--font-heading)" }}>
               Start Your Journey to Better Diagnosis
             </h1>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-[var(--text-slate)] mb-8">
               Join the healthcare revolution with AI-powered diagnostic support
             </p>
           </motion.div>
@@ -102,17 +117,17 @@ const Register = ({ onRegister }) => {
                   whileHover={{ x: 10 }}
                 >
                   <motion.div
-                    className="w-12 h-12 bg-gradient-to-r from-primary-100 to-secondary-100 rounded-lg flex items-center justify-center flex-shrink-0"
+                    className="w-12 h-12 bg-[var(--green-tint)] rounded-lg flex items-center justify-center flex-shrink-0"
                     whileHover={{ rotate: 180 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Icon className="text-primary-600 w-6 h-6" />
+                    <Icon className="text-[var(--green-deep)] w-6 h-6" />
                   </motion.div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                    <h3 className="text-lg font-semibold text-[var(--text-ink)] mb-1">
                       {benefit.title}
                     </h3>
-                    <p className="text-gray-600">{benefit.description}</p>
+                    <p className="text-[var(--text-slate)]">{benefit.description}</p>
                   </div>
                 </motion.div>
               );
@@ -121,7 +136,7 @@ const Register = ({ onRegister }) => {
 
           {/* Stats */}
           <motion.div
-            className="mt-12 grid grid-cols-2 gap-6 pt-8 border-t border-gray-200"
+            className="mt-12 grid grid-cols-2 gap-6 pt-8 border-t border-[var(--border)]"
             variants={containerVariants}
           >
             {[
@@ -133,10 +148,10 @@ const Register = ({ onRegister }) => {
                 variants={itemVariants}
                 className="text-center"
               >
-                <p className="text-3xl font-bold text-primary-600 mb-2">
+                <p className="text-3xl font-bold text-[var(--green-deep)] mb-2">
                   {stat.number}
                 </p>
-                <p className="text-gray-600">{stat.label}</p>
+                <p className="text-[var(--text-slate)]">{stat.label}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -150,7 +165,11 @@ const Register = ({ onRegister }) => {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <div className="w-full">
-            <RegisterForm onSubmit={handleRegister} isLoading={isLoading} />
+            <RegisterForm
+              onSubmit={handleRegister}
+              isLoading={isLoading}
+              errorMessage={authError}
+            />
           </div>
         </motion.div>
       </div>

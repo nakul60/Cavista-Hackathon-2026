@@ -1,0 +1,66 @@
+{
+  "patient": {
+    "name": "John Doe",
+    "age": 45,
+    "gender": "Male",
+    "occupation": "Software Engineer"
+  },
+  "visit": {
+    "date": "2026-02-21",
+    "type": "Outpatient Consultation"
+  },
+  "chief_complaint": "Persistent cough and fever for 5 days",
+  "history_of_present_illness": {
+    "duration": "5 days",
+    "location": "Chest",
+    "severity_out_of_10": 7,
+    "character": "Dry cough with occasional wheezing",
+    "aggravating_factors": ["Cold air", "Physical exertion"],
+    "relieving_factors": ["Warm drinks", "Rest"],
+    "medications_tried": ["Paracetamol", "Cough syrup"]
+  },
+  "review_of_systems": {
+    "constitutional": ["Fever", "Fatigue"],
+    "neurological": [],
+    "cardiovascular": [],
+    "respiratory": ["Cough", "Shortness of breath"],
+    "gastrointestinal": [],
+    "musculoskeletal": [],
+    "sleep": "Disturbed",
+    "other": []
+  },
+  "past_medical_history": {
+    "conditions": ["Hypertension", "Type 2 Diabetes"],
+    "surgeries": ["Appendectomy in 2015"],
+    "hospitalizations": ["Pneumonia in 2018"]
+  },
+  "family_history": {
+    "mother": "Hypertension",
+    "father": "Coronary artery disease",
+    "siblings": "None significant"
+  },
+  "social_history": {
+    "occupation": "Software Engineer",
+    "stress_level": "High",
+    "smoking": "No",
+    "alcohol": "Occasional",
+    "exercise": "3 times per week",
+    "diet": "Mixed diet with occasional junk food",
+    "recent_life_changes": "Started new job 2 months ago"
+  },
+  "current_medications": [
+    "Amlodipine 5mg daily",
+    "Metformin 500mg twice daily",
+    "Vitamin D supplements"
+  ],
+  "allergies": [
+    "Penicillin",
+    "Shellfish"
+  ],
+  "provisional_diagnosis": "Acute upper respiratory tract infection with possible viral pneumonia",
+  "ai_confidence": 0.82,
+  "fields_not_mentioned": [
+    "recent_life_changes_details",
+    "medication_adherence"
+  ]
+}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+<h1>Welcome back, {{ user_name }}! 👋</h1>
+<p class="sub">Here's what's happening with your patients today</p>
+
+<!-- STATS -->
+
+<div class="stats-row">
+
+{% set stats = [
+("Total Patients","248","+12% this month"),
+("Consultations","1,234","+8% this week"),
+("Diagnosis Accuracy","94.5%","+2.1% improvement"),
+("Avg. Consultation Time","12m 45s","-5% faster")
+] %}
+
+{% for title,val,desc in stats %}
+<div class="stat-card">
+    <h4>{{ title }}</h4>
+    <h2>{{ val }}</h2>
+    <p>{{ desc }}</p>
+</div>
+{% endfor %}
+
+</div>
+
+<!-- NEW CONSULTATION -->
+
+<h3>Start New Consultation</h3>
+
+<div class="consult-row">
+
+<div class="consult-card">
+    <h4>🎙 Voice Consultation</h4>
+    <p>Record patient symptoms via voice</p>
+    <a>Get Started +</a>
+</div>
+
+<div class="consult-card">
+    <h4>⌨ Text Consultation</h4>
+    <p>Enter patient data manually</p>
+    <a>Get Started +</a>
+</div>
+
+<div class="side-card">
+    <h4>This Week</h4>
+    <p>Consultations: 24</p>
+    <p>Patients: 18</p>
+    <p class="green">Avg Time: 12m</p>
+</div>
+
+</div>
+
+<!-- RECENT CONSULTATIONS -->
+
+<h3>Recent Consultations</h3>
+
+{% set patients = [
+("John Smith","Hypertension","2 hours ago"),
+("Sarah Johnson","Type 2 Diabetes","5 hours ago"),
+("Michael Brown","Influenza","1 day ago"),
+("Emily Davis","Migraine","2 days ago")
+] %}
+
+<div class="recent">
+
+{% for name,issue,time in patients %}
+<div class="recent-item">
+    <div>
+        <strong>{{ name }}</strong><br>
+        <small>{{ issue }}</small>
+    </div>
+    <div class="right">
+        Completed<br>
+        <small>{{ time }}</small>
+    </div>
+</div>
+{% endfor %}
+
+<a class="view-all">View All Consultations</a>
+
+</div>
+
+</section>
+
+{% endblock %}

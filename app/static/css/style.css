@@ -1,0 +1,488 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter, sans-serif;
+}
+
+body{
+background:#faf8f2;
+}
+
+/* NAVBAR */
+
+.navbar{
+background:#1f4636;
+color:white;
+padding:16px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.nav-left{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logo{
+background:#2e7d5b;
+width:36px;
+height:36px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.brand{font-weight:600;}
+
+.nav-right a{
+color:white;
+margin-left:20px;
+text-decoration:none;
+}
+
+.btn-primary{
+background:#2e7d5b;
+padding:10px 20px;
+border-radius:8px;
+color:white;
+}
+
+.btn-outline{
+border:1px solid #2e7d5b;
+padding:10px 20px;
+border-radius:8px;
+color:#2e7d5b;
+text-decoration:none;
+}
+
+/* HERO */
+
+.hero{
+padding:100px;
+max-width:1000px;
+margin:auto;
+}
+
+.hero h1{
+font-size:48px;
+}
+
+.hero span{color:#2e7d5b;}
+
+.stats{
+display:flex;
+justify-content:space-between;
+margin-top:60px;
+}
+
+/* FEATURES */
+
+.features{
+padding:80px;
+text-align:center;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+margin-top:40px;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:16px;
+}
+
+/* HOW */
+
+.how{
+padding:80px;
+}
+
+.how-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:30px;
+margin-top:30px;
+}
+
+.how-card{
+background:white;
+padding:30px;
+border-radius:16px;
+border:1px solid #cfe8d7;
+}
+
+/* CTA */
+
+.cta-box{
+margin:80px;
+background:#dcf7e3;
+padding:60px;
+border-radius:24px;
+text-align:center;
+}
+
+/* FOOTER */
+
+footer{
+background:#f0ede6;
+padding:60px;
+}
+
+.footer-grid{
+display:grid;
+grid-template-columns:2fr 1fr 1fr;
+gap:40px;
+}
+
+footer hr{
+margin:40px 0;
+}
+
+/* LOGIN */
+
+.login-page{
+padding:80px;
+}
+
+.login-container{
+display:grid;
+grid-template-columns:1.2fr 1fr;
+gap:80px;
+max-width:1200px;
+margin:auto;
+align-items:center;
+}
+
+.login-left h1{
+font-size:48px;
+margin-bottom:20px;
+}
+
+.login-left p{
+color:#555;
+margin-bottom:30px;
+}
+
+.login-left ul{
+list-style:none;
+}
+
+.login-left li{
+margin-bottom:15px;
+font-weight:500;
+}
+
+/* RIGHT SIDE */
+
+.login-right{
+background:white;
+padding:50px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+
+.login-right h2{
+font-size:32px;
+margin-bottom:10px;
+}
+
+.login-right p{
+margin-bottom:30px;
+color:#666;
+}
+
+.login-right label{
+display:block;
+margin-bottom:8px;
+font-weight:500;
+}
+
+.login-right input{
+width:100%;
+padding:14px;
+border-radius:10px;
+border:1px solid #ddd;
+margin-bottom:20px;
+}
+
+.forgot{
+display:block;
+margin-bottom:30px;
+color:#2e7d5b;
+text-decoration:none;
+}
+
+.full{
+width:100%;
+}
+
+.signup-text{
+margin-top:20px;
+text-align:center;
+}
+/* SIGNUP */
+
+.signup-page{
+padding:80px;
+}
+
+.signup-container{
+display:grid;
+grid-template-columns:1.2fr 1fr;
+gap:80px;
+max-width:1200px;
+margin:auto;
+align-items:start;
+}
+
+.signup-left h1{
+font-size:46px;
+margin:20px 0;
+}
+
+.badge{
+border:1px solid #ddd;
+padding:6px 14px;
+border-radius:20px;
+font-size:14px;
+}
+
+.feature-list{
+margin-top:40px;
+list-style:none;
+}
+
+.feature-list li{
+margin-bottom:20px;
+}
+
+.signup-stats{
+display:flex;
+gap:60px;
+margin-top:40px;
+}
+
+.signup-right{
+background:white;
+padding:50px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+
+.signup-right h2{
+font-size:32px;
+margin-bottom:10px;
+}
+
+.signup-right input{
+width:100%;
+padding:14px;
+border-radius:10px;
+border:1px solid #ddd;
+margin-bottom:18px;
+}
+
+.terms{
+font-size:14px;
+margin:20px 0;
+color:#444;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+padding:60px 80px;
+}
+
+.sub{
+color:#666;
+margin-bottom:30px;
+}
+
+.stats-row{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+margin-bottom:40px;
+}
+
+.stat-card{
+background:white;
+padding:25px;
+border-radius:14px;
+}
+
+.consult-row{
+display:grid;
+grid-template-columns:1fr 1fr .8fr;
+gap:25px;
+margin:30px 0;
+}
+
+.consult-card{
+background:white;
+padding:30px;
+border-radius:16px;
+}
+
+.side-card{
+background:#8c8f94;
+color:white;
+padding:25px;
+border-radius:16px;
+}
+
+.green{color:#3cff9d;}
+
+.recent{
+margin-top:20px;
+}
+
+.recent-item{
+background:white;
+padding:20px;
+border-radius:12px;
+margin-bottom:12px;
+display:flex;
+justify-content:space-between;
+}
+
+.view-all{
+display:block;
+text-align:center;
+padding:15px;
+background:white;
+border-radius:10px;
+}
+
+/* PATIENT PROFILE */
+
+.patient{
+padding:60px 80px;
+}
+
+.patient-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:40px;
+}
+
+.patient-actions{
+display:flex;
+gap:15px;
+}
+
+.patient-cards{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+margin-bottom:40px;
+}
+
+.p-card{
+background:white;
+padding:25px;
+border-radius:14px;
+text-align:center;
+}
+
+.patient-details{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+}
+
+.details-box{
+background:white;
+padding:30px;
+border-radius:16px;
+}
+
+.report-row{
+display:flex;
+justify-content:space-between;
+padding:12px 0;
+border-bottom:1px solid #eee;
+}
+
+.report-row a{
+color:#2e7d5b;
+text-decoration:none;
+}
+
+/* CONSULTATION */
+
+.consult,.audio,.text-consult{
+padding:60px 80px;
+}
+
+.back{
+display:inline-block;
+margin-bottom:20px;
+color:#2e7d5b;
+text-decoration:none;
+}
+
+.consult-select{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+margin-top:40px;
+}
+
+.consult-box{
+background:white;
+padding:40px;
+border-radius:18px;
+text-decoration:none;
+color:black;
+}
+
+.audio-box{
+background:white;
+padding:40px;
+border-radius:20px;
+max-width:600px;
+}
+
+.audio-box input{
+width:100%;
+border:2px dashed #ccc;
+padding:50px;
+margin:30px 0;
+border-radius:16px;
+}
+
+.audio-actions{
+display:flex;
+gap:20px;
+}
+
+.q-box{
+background:white;
+padding:30px;
+border-radius:16px;
+margin-bottom:25px;
+}
+
+.q-box textarea{
+width:100%;
+padding:15px;
+border-radius:10px;
+border:1px solid #ddd;
+margin-top:15px;
+}
+
+.form-actions{
+display:flex;
+gap:20px;
+}
