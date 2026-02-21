@@ -1,1 +1,91 @@
 https://claude.ai/chat/d8e8ed40-a14d-4f72-b4d5-cf7e50233cd2
+smart-emr-assistant/
+│
+├── README.md
+├── .env                          # All API keys (never push to GitHub)
+├── .env.example                  # Template showing what keys are needed
+├── .gitignore
+├── docker-compose.yml            # Run everything together
+│
+├── backend/                      # Python + Flask
+│   ├── app.py                    # Flask app entry point
+│   ├── config.py                 # Load env variables, MongoDB connection
+│   ├── requirements.txt
+│   │
+│   ├── routes/                   # One file per feature
+│   │   ├── __init__.py
+│   │   ├── audio_routes.py       # POST /api/upload-audio
+│   │   ├── emr_routes.py         # GET/POST /api/emr
+│   │   ├── icd_routes.py         # GET /api/icd
+│   │   ├── drug_routes.py        # GET /api/drugs
+│   │   ├── summary_routes.py     # POST /api/summary
+│   │   └── patient_routes.py     # GET/POST /api/patients
+│   │
+│   ├── services/                 # Core business logic (pipeline stages)
+│   │   ├── __init__.py
+│   │   ├── transcription.py      # Whisper STT logic
+│   │   ├── emr_extractor.py      # Claude → structured EMR JSON
+│   │   ├── icd_mapper.py         # NIH API → ICD codes
+│   │   ├── drug_suggester.py     # OpenFDA + Claude → drug suggestions
+│   │   ├── summary_generator.py  # Claude → patient friendly summary
+│   │   ├── translator.py         # Google Translate → Hindi/Marathi
+│   │   └── pdf_generator.py      # ReportLab → PDF report
+│   │
+│   ├── models/                   # MongoDB document schemas (PyMongo)
+│   │   ├── __init__.py
+│   │   ├── patient.py            # Patient document structure
+│   │   └── visit.py              # Visit/EMR document structure
+│   │
+│   ├── utils/                    # Helper functions
+│   │   ├── __init__.py
+│   │   ├── audio_utils.py        # Audio file validation, format conversion
+│   │   ├── claude_client.py      # Anthropic API wrapper
+│   │   └── response_utils.py     # Standard Flask JSON responses
+│   │
+│   └── tests/                    # Unit tests
+│       ├── test_transcription.py
+│       ├── test_emr_extractor.py
+│       └── test_icd_mapper.py
+│
+├── frontend/                     # React + Tailwind
+│   ├── package.json
+│   ├── tailwind.config.js
+│   ├── index.html
+│   │
+│   └── src/
+│       ├── main.jsx              # React entry point
+│       ├── App.jsx               # Routes setup
+│       │
+│       ├── pages/                # One file per screen
+│       │   ├── Dashboard.jsx     # Doctor's home — list of visits
+│       │   ├── NewVisit.jsx      # Record audio + live transcription
+│       │   ├── EMRView.jsx       # View/edit structured EMR record
+│       │   ├── PatientSummary.jsx # Patient friendly view
+│       │   └── PatientList.jsx   # All patients
+│       │
+│       ├── components/           # Reusable UI pieces
+│       │   ├── AudioRecorder.jsx # Mic button, waveform, stop/start
+│       │   ├── EMRCard.jsx       # Displays structured EMR fields
+│       │   ├── ICDTag.jsx        # Shows ICD code as a badge
+│       │   ├── DrugCard.jsx      # Drug name, dose, notes
+│       │   ├── TranscriptViewer.jsx  # Shows doctor vs patient speech
+│       │   ├── SummaryCard.jsx   # Patient friendly summary display
+│       │   ├── LanguageToggle.jsx # Switch English/Hindi/Marathi
+│       │   └── Navbar.jsx
+│       │
+│       ├── api/                  # All Flask API calls in one place
+│       │   ├── audioApi.js       # upload audio
+│       │   ├── emrApi.js         # fetch/save EMR
+│       │   ├── icdApi.js         # fetch ICD codes
+│       │   ├── drugApi.js        # fetch drug suggestions
+│       │   └── summaryApi.js     # fetch patient summary
+│       │
+│       ├── context/              # Global state
+│       │   └── EMRContext.jsx    # Current visit data shared across pages
+│       │
+│       └── utils/
+│           └── formatters.js     # Date formatting, BP display etc
+│
+└── storage/                      # Local dev file storage
+    ├── audio/                    # Uploaded audio files (.wav)
+    └── reports/                  # Generated PDF reports
