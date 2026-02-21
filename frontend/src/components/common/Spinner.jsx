@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const Spinner = ({ size = "md", color = "primary" }) => {
+const Spinner = ({ size = "md", color = "forest" }) => {
   const sizes = {
     sm: "w-4 h-4",
     md: "w-8 h-8",
@@ -8,8 +8,8 @@ const Spinner = ({ size = "md", color = "primary" }) => {
   };
 
   const colors = {
-    primary: "border-primary-500",
-    secondary: "border-secondary-500",
+    forest: "border-forest",
+    secondary: "border-forest-mid",
     white: "border-white",
   };
 

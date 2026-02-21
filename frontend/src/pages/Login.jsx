@@ -11,13 +11,11 @@ const Login = ({ onLogin }) => {
   const handleLogin = async (formData) => {
     setIsLoading(true);
     try {
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
       console.log("Login data:", formData);
-      // Call parent onLogin to update auth state
       if (onLogin) {
         onLogin();
-        navigate("/dashboard");
+        navigate("/profile");
       }
     } finally {
       setIsLoading(false);

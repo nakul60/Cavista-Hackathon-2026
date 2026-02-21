@@ -17,15 +17,15 @@ const Button = ({
 
   const variants = {
     primary:
-      "bg-gradient-to-r from-primary-600 to-primary-500 text-white hover:shadow-lg hover:shadow-primary-500/50 disabled:opacity-50",
+      "bg-forest text-white hover:bg-forest-deep hover:shadow-lg transition-colors disabled:opacity-50",
     secondary:
-      "bg-gradient-to-r from-secondary-600 to-secondary-500 text-white hover:shadow-lg disabled:opacity-50",
+      "bg-forest-mid text-white hover:bg-forest transition-colors disabled:opacity-50",
     outline:
-      "border-2 border-primary-500 text-primary-700 hover:bg-primary-500 hover:text-white disabled:opacity-50",
+      "border-2 border-forest text-forest hover:bg-forest hover:text-white disabled:opacity-50",
     danger:
-      "bg-gradient-to-r from-red-500 to-red-600 text-white hover:shadow-lg disabled:opacity-50",
+      "bg-alert-red text-white hover:bg-red-900 hover:shadow-lg disabled:opacity-50",
     ghost:
-      "text-primary-600 hover:bg-primary-100 hover:text-primary-700 disabled:opacity-50",
+      "text-forest hover:bg-forest-tint hover:text-forest-deep disabled:opacity-50",
   };
 
   const sizes = {

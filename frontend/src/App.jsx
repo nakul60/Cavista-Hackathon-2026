@@ -36,26 +36,12 @@ function App() {
 
         {/* Protected Routes */}
         <Route
-          path="/dashboard"
-          element={
-            isAuthenticated ? (
-              <Dashboard onLogout={handleLogout} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
+          path="/profile"
+          element={<Dashboard onLogout={handleLogout} />}
         />
         <Route
           path="/patient-input"
           element={<PatientInput onLogout={handleLogout} />}
-          // Temporarily allowing without auth for testing
-          // element={
-          //   isAuthenticated ? (
-          //     <PatientInput onLogout={handleLogout} />
-          //   ) : (
-          //     <Navigate to="/login" />
-          //   )
-          // }
         />
       </Routes>
     </Router>

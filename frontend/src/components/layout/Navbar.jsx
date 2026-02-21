@@ -8,7 +8,7 @@ const Navbar = ({ user, onLogout }) => {
   const location = useLocation();
 
   const navItems = [
-    { label: "Dashboard", path: "/dashboard" },
+    { label: "Dashboard", path: "/profile" },
     { label: "Consultations", path: "/consultations" },
     { label: "Patients", path: "/patients" },
     { label: "Settings", path: "/settings" },
@@ -18,7 +18,7 @@ const Navbar = ({ user, onLogout }) => {
 
   return (
     <motion.nav
-      className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm"
+      className="bg-forest-deep border-b border-border sticky top-0 z-50 shadow-sm"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
@@ -29,10 +29,10 @@ const Navbar = ({ user, onLogout }) => {
           className="flex items-center gap-3 cursor-pointer"
           whileHover={{ scale: 1.05 }}
         >
-          <div className="w-10 h-10 bg-gradient-to-r from-primary-600 to-primary-500 rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-xl">H</span>
+          <div className="w-10 h-10 bg-forest-mid rounded-full flex items-center justify-center">
+            <span className="text-white font-bold text-xl">M</span>
           </div>
-          <span className="text-xl font-bold text-primary-700">HealthOS</span>
+          <span className="text-xl font-bold text-white">MedScript</span>
         </motion.div>
 
         {/* Desktop Menu */}
@@ -42,15 +42,15 @@ const Navbar = ({ user, onLogout }) => {
               <motion.div
                 className={`relative pb-2 font-semibold transition-colors duration-300 ${
                   isActive(item.path)
-                    ? "text-primary-700"
-                    : "text-gray-600 hover:text-primary-600"
+                    ? "text-forest-tint"
+                    : "text-white hover:text-forest-tint"
                 }`}
                 whileHover={{ x: 5 }}
               >
                 {item.label}
                 {isActive(item.path) && (
                   <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-600 to-primary-500"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-forest-tint"
                     layoutId="navbar-indicator"
                     transition={{ duration: 0.3 }}
                   />
@@ -64,7 +64,7 @@ const Navbar = ({ user, onLogout }) => {
         <div className="hidden md:flex items-center gap-4">
           <motion.button
             onClick={onLogout}
-            className="px-6 py-2.5 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-primary-500/50 transition-all"
+            className="px-6 py-2.5 bg-forest-mid text-white font-semibold rounded-xl hover:bg-forest hover:shadow-lg transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -74,7 +74,7 @@ const Navbar = ({ user, onLogout }) => {
 
         {/* Mobile Menu Button */}
         <motion.button
-          className="md:hidden text-primary-700"
+          className="md:hidden text-white"
           onClick={() => setIsOpen(!isOpen)}
           whileTap={{ scale: 0.9 }}
         >
@@ -85,7 +85,7 @@ const Navbar = ({ user, onLogout }) => {
       {/* Mobile Menu */}
       {isOpen && (
         <motion.div
-          className="md:hidden bg-slate-50 p-4 border-t border-gray-200"
+          className="md:hidden bg-forest-deep p-4 border-t border-forest-border"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
@@ -100,8 +100,8 @@ const Navbar = ({ user, onLogout }) => {
                 <motion.div
                   className={`py-2 px-4 rounded-lg transition-colors ${
                     isActive(item.path)
-                      ? "bg-primary-100 text-primary-700"
-                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                      ? "bg-forest-mid text-white"
+                      : "text-forest-tint hover:text-white hover:bg-forest-mid"
                   }`}
                   whileHover={{ x: 5 }}
                 >

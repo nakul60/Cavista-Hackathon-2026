@@ -26,14 +26,14 @@ const TextInput = ({
       transition={{ duration: 0.3 }}
     >
       {label && (
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-sm font-semibold text-text-slate mb-2">
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </label>
       )}
       <div className="relative">
         {Icon && (
-          <Icon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary-600 w-5 h-5" />
+          <Icon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-forest w-5 h-5" />
         )}
         <input
           type={isPassword && !showPassword ? "password" : "text"}
@@ -41,14 +41,14 @@ const TextInput = ({
           value={value}
           onChange={onChange}
           disabled={disabled}
-          className={`w-full px-4 py-3 ${Icon ? "pl-10" : ""} bg-white border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:border-primary-500 focus:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${error ? "border-red-500" : ""} ${className}`}
+          className={`w-full px-4 py-3 ${Icon ? "pl-10" : ""} bg-clinical-warm-white border-2 border-border rounded-xl text-text-ink placeholder-text-ash focus:outline-none focus:border-forest focus:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${error ? "border-alert-red" : ""} ${className}`}
           {...props}
         />
         {isPassword && (
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary-600 transition-colors"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-ash hover:text-forest transition-colors"
           >
             {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
           </button>
@@ -56,7 +56,7 @@ const TextInput = ({
       </div>
       {error && (
         <motion.p
-          className="text-red-500 text-sm mt-2"
+          className="text-alert-red text-sm mt-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >

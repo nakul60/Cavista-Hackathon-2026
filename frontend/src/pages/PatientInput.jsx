@@ -14,7 +14,7 @@ const PatientInput = ({ onLogout }) => {
     email: "patient@example.com",
   });
 
-  const [inputMode, setInputMode] = useState(null); // null, 'audio', 'text'
+  const [inputMode, setInputMode] = useState(null);
   const [audioFile, setAudioFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -42,7 +42,8 @@ const PatientInput = ({ onLogout }) => {
       title: "Describe your main problem",
       description:
         "How does your discomfort feel to you? Where exactly do you feel it? How severe is it on a scale of 1 to 10? When does it usually occur (morning, night, after activity, etc.)? What seems to worsen it, and what provides relief?",
-      example: "Pain at the back of my head, 7/10, worse in the morning, better with rest.",
+      example:
+        "Pain at the back of my head, 7/10, worse in the morning, better with rest.",
     },
     {
       id: "q3",
@@ -121,8 +122,13 @@ const PatientInput = ({ onLogout }) => {
   };
 
   const handleTextSubmit = async () => {
-    // Validate all fields are filled
-    if (!formData.q1 || !formData.q2 || !formData.q3 || !formData.q4 || !formData.q5) {
+    if (
+      !formData.q1 ||
+      !formData.q2 ||
+      !formData.q3 ||
+      !formData.q4 ||
+      !formData.q5
+    ) {
       alert("Please answer all questions");
       return;
     }
@@ -175,7 +181,7 @@ const PatientInput = ({ onLogout }) => {
   return (
     <MainLayout user={user} onLogout={handleLogout}>
       <motion.div
-        className="min-h-screen p-4 md:p-8 lg:p-12 bg-gradient-to-br from-white via-slate-50 to-slate-100"
+        className="min-h-screen p-4 md:p-8 lg:p-12 bg-clinical-linen"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -186,8 +192,8 @@ const PatientInput = ({ onLogout }) => {
           variants={itemVariants}
         >
           <motion.button
-            onClick={() => navigate("/dashboard")}
-            className="flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold transition-colors"
+            onClick={() => navigate("/profile")}
+            className="flex items-center gap-2 text-forest hover:text-forest-deep font-semibold transition-colors"
             whileHover={{ x: -5 }}
           >
             <ArrowLeft size={20} />
@@ -195,9 +201,7 @@ const PatientInput = ({ onLogout }) => {
           </motion.button>
         </motion.div>
 
-        {/* Main Content */}
         {inputMode === null ? (
-          // Mode Selection View
           <>
             <motion.h1
               className="text-4xl font-bold text-gray-900 mb-2"
@@ -205,10 +209,7 @@ const PatientInput = ({ onLogout }) => {
             >
               Patient Consultation Input
             </motion.h1>
-            <motion.p
-              className="text-gray-600 mb-12"
-              variants={itemVariants}
-            >
+            <motion.p className="text-gray-600 mb-12" variants={itemVariants}>
               Choose how you would like to provide your medical information
             </motion.p>
 
@@ -233,7 +234,8 @@ const PatientInput = ({ onLogout }) => {
                       Audio Upload
                     </h3>
                     <p className="text-gray-600 mb-6">
-                      Upload an audio recording of your consultation with your doctor. Our AI will extract and analyze the information.
+                      Upload an audio recording of your consultation with your
+                      doctor. Our AI will extract and analyze the information.
                     </p>
                     <motion.button
                       className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold transition-colors"
@@ -266,7 +268,8 @@ const PatientInput = ({ onLogout }) => {
                       Text Form
                     </h3>
                     <p className="text-gray-600 mb-6">
-                      Answer guided questions about your medical history and symptoms. Easy and straightforward.
+                      Answer guided questions about your medical history and
+                      symptoms. Easy and straightforward.
                     </p>
                     <motion.button
                       className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold transition-colors"
@@ -281,7 +284,6 @@ const PatientInput = ({ onLogout }) => {
             </div>
           </>
         ) : inputMode === "audio" ? (
-          // Audio Upload View
           <>
             <motion.div
               className="flex items-center gap-4 mb-8"
@@ -304,14 +306,14 @@ const PatientInput = ({ onLogout }) => {
               Upload Audio Recording
             </motion.h2>
 
-            <motion.div
-              className="max-w-2xl"
-              variants={itemVariants}
-            >
+            <motion.div className="max-w-2xl" variants={itemVariants}>
               <Card>
                 <div className="space-y-6">
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center hover:border-primary-500 transition-colors cursor-pointer"
-                    onClick={() => document.getElementById("audioInput")?.click()}
+                  <div
+                    className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center hover:border-primary-500 transition-colors cursor-pointer"
+                    onClick={() =>
+                      document.getElementById("audioInput")?.click()
+                    }
                   >
                     <Mic size={48} className="mx-auto text-gray-400 mb-4" />
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -356,7 +358,6 @@ const PatientInput = ({ onLogout }) => {
             </motion.div>
           </>
         ) : (
-          // Text Form View
           <>
             <motion.div
               className="flex items-center gap-4 mb-8"
@@ -384,10 +385,7 @@ const PatientInput = ({ onLogout }) => {
               variants={containerVariants}
             >
               {questions.map((question, index) => (
-                <motion.div
-                  key={question.id}
-                  variants={itemVariants}
-                >
+                <motion.div key={question.id} variants={itemVariants}>
                   <Card>
                     <div className="space-y-4">
                       <div>
@@ -404,7 +402,9 @@ const PatientInput = ({ onLogout }) => {
 
                       <textarea
                         value={formData[question.id]}
-                        onChange={(e) => handleTextChange(question.id, e.target.value)}
+                        onChange={(e) =>
+                          handleTextChange(question.id, e.target.value)
+                        }
                         placeholder="Enter your answer here..."
                         className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
                         rows="5"

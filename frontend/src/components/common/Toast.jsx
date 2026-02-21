@@ -5,27 +5,27 @@ const Toast = ({ message, type = "info", onClose }) => {
   const types = {
     success: {
       icon: CheckCircle,
-      bg: "bg-green-500/20",
-      border: "border-green-500/50",
-      text: "text-green-400",
+      bg: "bg-vital-green-light",
+      border: "border-vital-green-border",
+      text: "text-vital-green",
     },
     error: {
       icon: AlertCircle,
-      bg: "bg-red-500/20",
-      border: "border-red-500/50",
-      text: "text-red-400",
+      bg: "bg-alert-red-light",
+      border: "border-alert-red-border",
+      text: "text-alert-red",
     },
     warning: {
       icon: AlertTriangle,
-      bg: "bg-yellow-500/20",
-      border: "border-yellow-500/50",
-      text: "text-yellow-400",
+      bg: "bg-caution-amber-light",
+      border: "border-caution-amber-border",
+      text: "text-caution-amber",
     },
     info: {
       icon: Info,
-      bg: "bg-primary-500/20",
-      border: "border-primary-500/50",
-      text: "text-primary-400",
+      bg: "bg-forest-tint",
+      border: "border-forest-border",
+      text: "text-forest",
     },
   };
 

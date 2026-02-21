@@ -24,7 +24,6 @@ const Dashboard = ({ onLogout }) => {
 
   const handleNewConsultation = (type) => {
     console.log("New consultation:", type);
-    // Navigate to consultation page
   };
 
   const containerVariants = {
@@ -43,7 +42,7 @@ const Dashboard = ({ onLogout }) => {
   return (
     <MainLayout user={user} onLogout={handleLogout}>
       <motion.div
-        className="min-h-screen p-4 md:p-8 lg:p-12 bg-gradient-to-br from-white via-slate-50 to-slate-100"
+        className="min-h-screen p-4 md:p-8 lg:p-12 bg-clinical-linen"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -55,10 +54,10 @@ const Dashboard = ({ onLogout }) => {
             className="flex flex-col md:flex-row items-start md:items-center justify-between mb-12 gap-4"
           >
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
+              <h1 className="text-4xl md:text-5xl font-bold text-text-ink mb-2">
                 Welcome back, {user.name.split(" ")[1]}!
               </h1>
-              <p className="text-gray-600 text-lg">
+              <p className="text-text-slate text-lg">
                 Here's what's happening with your patients today
               </p>
             </div>
@@ -67,18 +66,18 @@ const Dashboard = ({ onLogout }) => {
               whileHover={{ scale: 1.05 }}
             >
               <motion.button
-                className="p-3 bg-white border border-gray-200 hover:border-primary-300 rounded-xl text-primary-600 transition-colors relative shadow-sm"
+                className="p-3 bg-clinical-warm-white border border-border hover:border-forest rounded-xl text-forest transition-colors relative shadow-sm"
                 whileTap={{ scale: 0.95 }}
               >
                 <Bell size={24} />
                 <motion.span
-                  className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full"
+                  className="absolute top-2 right-2 w-2 h-2 bg-alert-red rounded-full"
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </motion.button>
               <motion.button
-                className="px-6 py-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-semibold rounded-lg hover:shadow-glow-lg transition-all"
+                className="px-6 py-3 bg-forest text-white font-semibold rounded-lg hover:bg-forest-deep transition-all"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

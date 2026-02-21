@@ -7,35 +7,74 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        inter: ['Inter', 'sans-serif'],
+        heading: ['Lora', 'Georgia', 'serif'],
+        ui: ['DM Sans', 'system-ui', '-apple-system', 'sans-serif'],
+        data: ['IBM Plex Mono', 'Courier New', 'monospace'],
       },
       colors: {
-        primary: {
-          50: '#f2f9e8',
-          100: '#e6f2d1',
-          200: '#d9ebb9',
-          300: '#ccde9f',
-          400: '#bfce8a',
-          500: '#9ae65a',
-          600: '#7ed321',
-          700: '#6ba01f',
-          800: '#5a8a1a',
-          900: '#487214',
+        /* --- BACKGROUNDS --- */
+        'clinical': {
+          linen: '#F5F2EE',
+          'warm-white': '#FDFCFB',
+          parchment: '#EDE9E3',
         },
-        secondary: {
-          50: '#f0fdf9',
-          100: '#e0faf5',
-          200: '#bfeff3',
-          300: '#9eebe0',
-          400: '#7de7cd',
-          500: '#5ce1b8',
-          600: '#3ac99d',
-          700: '#2a9b7e',
-          800: '#1e6b59',
-          900: '#163d37',
+        /* --- TEXT --- */
+        'text': {
+          ink: '#1A1410',
+          slate: '#4A4540',
+          ash: '#8C867E',
         },
-        background: '#f7f9f8',
-        dark: '#1e2a26',
+        /* --- BRAND GREEN --- */
+        'forest': {
+          deep: '#1B4332',
+          DEFAULT: '#2D6A4F',
+          mid: '#40916C',
+          tint: '#D8F3DC',
+          border: '#A8D5B5',
+        },
+        /* --- SEMANTIC: ALERT RED --- */
+        'alert': {
+          red: '#9B2226',
+          'red-light': '#F8D7D7',
+          'red-border': '#E8AAAA',
+        },
+        /* --- SEMANTIC: AMBER (WARNING) --- */
+        'caution': {
+          amber: '#7D4E00',
+          'amber-light': '#FDF0DC',
+          'amber-border': '#F0CFA0',
+        },
+        /* --- SEMANTIC: VITAL GREEN --- */
+        'vital': {
+          green: '#1B4332',
+          'green-light': '#D8F3DC',
+          'green-border': '#A8D5B5',
+        },
+        /* --- ACCENT: GOLD --- */
+        'accent': {
+          gold: '#B7791F',
+          'gold-light': '#FEF9EE',
+          'gold-border': '#E9C97A',
+        },
+        /* --- BORDERS --- */
+        'border': {
+          DEFAULT: '#D8D2C8',
+          strong: '#C4BDB5',
+        },
+      },
+      backgroundColor: {
+        'page': '#F5F2EE',
+        'card': '#FDFCFB',
+        'subtle': '#EDE9E3',
+      },
+      textColor: {
+        'primary': '#1A1410',
+        'secondary': '#4A4540',
+        'muted': '#8C867E',
+      },
+      borderColor: {
+        'DEFAULT': '#D8D2C8',
+        'strong': '#C4BDB5',
       },
       animation: {
         fadeIn: 'fadeIn 0.5s ease-in-out',
@@ -74,8 +113,8 @@ export default {
         },
       },
       boxShadow: {
-        'glow': '0 0 20px rgba(14, 165, 233, 0.5)',
-        'glow-lg': '0 0 30px rgba(14, 165, 233, 0.7)',
+        'glow': '0 0 20px rgba(45, 106, 79, 0.3)',
+        'glow-lg': '0 0 30px rgba(45, 106, 79, 0.5)',
       },
     },
   },
