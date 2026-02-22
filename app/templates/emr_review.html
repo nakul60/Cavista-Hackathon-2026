@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}EMR Review{% endblock %}
+{% block content %}
+<section class="emr-review">
+    <h1>Review Generated EMR</h1>
+    {% if error %}
+    <div class="flash-message flash-danger"><i class="fas fa-exclamation-circle"></i> {{ error }}</div>
+    {% endif %}
+    <h3>Summary</h3>
+    <div class="summary-box">{{ summary }}</div>
+    <h3>Extracted EMR (JSON)</h3>
+    <pre style="background:#f5f5f5; padding:1em; border-radius:6px;">{{ emr_json }}</pre>
+    <form method="POST">
+        <input type="hidden" name="summary" value="{{ summary|e }}">
+        <input type="hidden" name="emr_json" value="{{ emr_json|e }}">
+        <div style="margin:1em 0;">
+            <label><strong>Is this EMR correct?</strong></label><br>
+            <button name="decision" value="yes" class="btn-primary">Yes, Approve & Store</button>
+            <button name="decision" value="no" class="btn-outline" type="button" onclick="document.getElementById('correction-box').style.display='block'">No, Needs Correction</button>
+        </div>
+        <div id="correction-box" style="display:none; margin:1em 0;">
+            <label>Correction/Comments:</label>
+            <textarea name="correction" rows="4" style="width:100%"></textarea>
+            <button name="decision" value="correction" class="btn-primary">Submit Correction</button>
+        </div>
+    </form>
+</section>
+{% endblock %}
