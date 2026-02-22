@@ -129,6 +129,21 @@ def login():
     
     return render_template('login.html')
 
+# ===== PATIENT PROFILE =====
+@auth_bp.route('/patient_profile', methods=['GET'])
+def patient_profile():
+    """Patient profile page"""
+    if not session.get('user_id') or session.get('user_role') != 'patient':
+        return redirect(url_for('auth.login'))
+    return render_template('patient_profile.html')
+
+# ===== DOCTOR DASHBOARD =====
+@auth_bp.route('/doctor_dashboard', methods=['GET'])
+def doctor_dashboard():
+    """Doctor dashboard page"""
+    if not session.get('user_id') or session.get('user_role') != 'doctor':
+        return redirect(url_for('auth.login'))
+    return render_template('doctor_dashboard.html')
 
 # ===== LOGOUT ROUTES =====
 @auth_bp.route('/logout', methods=['GET', 'POST'])

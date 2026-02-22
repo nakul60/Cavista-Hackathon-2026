@@ -26,29 +26,6 @@
         {% endfor %}
     </div>
 
-    <!-- NEW CONSULTATION -->
-    <h3>Start New Consultation</h3>
-    <div class="consult-row">
-        <div class="consult-card">
-            <i class="fas fa-microphone-alt fa-2x" style="color:#2e7d5b;"></i>
-            <h4>Voice Consultation</h4>
-            <p>Record patient symptoms via voice</p>
-            <a href="{{ url_for('emr_routes.consult_audio') }}" class="btn-outline">Get Started <i class="fas fa-arrow-right"></i></a>
-        </div>
-        <div class="consult-card">
-            <i class="fas fa-keyboard fa-2x" style="color:#2e7d5b;"></i>
-            <h4>Text Consultation</h4>
-            <p>Enter patient data manually</p>
-            <a href="{{ url_for('emr_routes.consult_text') }}" class="btn-outline">Get Started <i class="fas fa-arrow-right"></i></a>
-        </div>
-        <div class="side-card">
-            <h4>This Week</h4>
-            <p><i class="fas fa-calendar-alt"></i> Consultations: 24</p>
-            <p><i class="fas fa-user"></i> Patients: 18</p>
-            <p class="green"><i class="fas fa-stopwatch"></i> Avg Time: 12m</p>
-        </div>
-    </div>
-
     <!-- RECENT CONSULTATIONS -->
     <h3>Recent Consultations</h3>
     <div class="recent">

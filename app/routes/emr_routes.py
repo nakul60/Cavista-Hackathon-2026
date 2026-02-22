@@ -6,51 +6,13 @@ from app import db
 
 emr_bp = Blueprint('emr', __name__)
 
-# ===== PROTECTED DASHBOARD ROUTES =====
-
-@emr_bp.route('/dashboard', methods=['GET'])
-def doctor_dashboard():
-    """Doctor dashboard - only accessible to logged-in doctors"""
-    # Check if user is logged in
-    if 'user_id' not in session:
-        flash('❌ Please login first', 'warning')
-        return redirect(url_for('auth.login'))
-    
-    # Check if user is a doctor
-    if session.get('user_role') != 'doctor':
-        flash('❌ Access denied. Doctor role required.', 'danger')
-        return redirect(url_for('auth.home'))
-    
-    print(f'✓ Doctor dashboard accessed by: {session.get("user_email")}')
-    return render_template('dashboard.html', user_name=session.get('user_name'))
-
-
-@emr_bp.route('/patient-profile', methods=['GET'])
-def patient_dashboard():
-    """Patient profile/dashboard - only accessible to logged-in patients"""
-    # Check if user is logged in
-    if 'user_id' not in session:
-        flash('❌ Please login first', 'warning')
-        return redirect(url_for('auth.login'))
-    
-    # Check if user is a patient
-    if session.get('user_role') != 'patient':
-        flash('❌ Access denied. Patient role required.', 'danger')
-        return redirect(url_for('auth.home'))
-    
-    print(f'✓ Patient profile accessed by: {session.get("user_email")}')
-    return render_template('patient_profile.html', user_name=session.get('user_name'))
-
-
-# ===== EMR API ENDPOINTS =====
-
 @emr_bp.route('/api/emr/store', methods=['GET', 'POST'])
 def store_and_display_emr():
     # Store EMR data from emr_output.json into DB and display it
-    json_path = os.path.join(current_app.root_path, 'emr_output.json')
+    json_path = os.path.join(current_app.root_path, 'final_emr_output.json')
     if not os.path.exists(json_path):
-        print(f'Error: emr_output.json not found at {json_path}')
-        return 'Error: emr_output.json not found', 404
+        print(f'Error:final_emr_output.json not found at {json_path}')
+        return 'Error: final_emr_output.json not found', 404
     with open(json_path, 'r') as f:
         emr_data = json.load(f)
     emr = EMR(

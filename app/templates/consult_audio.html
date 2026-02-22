@@ -3,7 +3,7 @@
 
 {% block content %}
 <section class="audio">
-    <a href="{{ url_for('emr_routes.consult_choice') }}" class="back"><i class="fas fa-arrow-left"></i> Back</a>
+    <a href="{{ url_for('consult.consult_choice') }}" class="back"><i class="fas fa-arrow-left"></i> Back</a>
     <h1><i class="fas fa-microphone-alt"></i> Upload Audio Recording</h1>
     <form method="POST" enctype="multipart/form-data" class="audio-box">
         <div class="file-upload">
@@ -13,7 +13,7 @@
             <label for="audio-file" class="btn-outline">Choose File</label>
         </div>
         <div class="audio-actions">
-            <a href="{{ url_for('emr_routes.consult_choice') }}" class="btn-outline"><i class="fas fa-times"></i> Cancel</a>
+            <a href="{{ url_for('consult.consult_choice') }}" class="btn-outline"><i class="fas fa-times"></i> Cancel</a>
             <button class="btn-primary"><i class="fas fa-upload"></i> Upload Recording</button>
         </div>
     </form>

@@ -27,6 +27,9 @@
                     <i class="fas fa-user"></i> Patient
                 {% endif %}
             </span>
+            <form method="POST" action="{{ url_for('consult.consult_choice') }}" style="display: inline; margin-right: 10px;">
+                <button type="submit" class="btn-primary"><i class="fas fa-comments-medical"></i> Consult</button>
+            </form>
             <form method="POST" action="{{ url_for('auth.logout') }}" style="display: inline;">
                 <button type="submit" class="btn-outline" style="cursor: pointer;"><i class="fas fa-sign-out-alt"></i> Logout</button>
             </form>

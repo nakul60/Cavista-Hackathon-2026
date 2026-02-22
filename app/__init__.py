@@ -17,8 +17,10 @@ def create_app():
     # Registering blueprints so that the flask knows about the routes
     from app.routes.auth import auth_bp
     from app.routes.emr_routes import emr_bp
+    from app.routes.consult_routes import consult_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(emr_bp)
+    app.register_blueprint(consult_bp)
 
     return app
