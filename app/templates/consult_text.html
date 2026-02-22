@@ -5,21 +5,27 @@
 <section class="text-consult">
     <a href="{{ url_for('consult.consult_choice') }}" class="back"><i class="fas fa-arrow-left"></i> Back</a>
     <h1><i class="fas fa-edit"></i> Medical Information Form</h1>
-    <form method="POST">
-        {% set questions = [
-            ("Tell us about yourself", "Enter your name, age and main problem."),
-            ("Describe your main problem", "Explain pain, severity, location."),
-            ("Any other symptoms or changes?", "Mention fever, nausea, dizziness etc."),
-            ("Medical history", "Existing conditions, surgeries, meds."),
-            ("Lifestyle", "Work, stress, habits.")
-        ] %}
-        {% for q, help in questions %}
-        <div class="q-box">
-            <h3>{{ q }}</h3>
-            <p class="help-text">{{ help }}</p>
-            <textarea rows="4" name="q{{ loop.index }}" placeholder="Enter your answer here..."></textarea>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="question-list">
+            {% set questions = [
+                ("Tell us about yourself", "Enter your name, age and main problem."),
+                ("Describe your main problem", "Explain pain, severity, location."),
+                ("Any other symptoms or changes?", "Mention fever, nausea, dizziness etc."),
+                ("Medical history", "Existing conditions, surgeries, meds."),
+                ("Lifestyle", "Work, stress, habits.")
+            ] %}
+            {% for q, help in questions %}
+            <div class="q-box">
+                <h3>{{ q }}</h3>
+                <p class="help-text">{{ help }}</p>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        <div class="audio-section">
+            <h3><i class="fas fa-microphone-alt"></i> Upload a single audio answering all questions</h3>
+            <p class="help-text">After reading the questions above, record your answers using any device/app, then upload the audio file here.</p>
+            <input type="file" name="audio_file" accept="audio/*">
+        </div>
         <div class="form-actions">
             <a href="{{ url_for('consult.consult_choice') }}" class="btn-outline"><i class="fas fa-times"></i> Cancel</a>
             <button class="btn-primary"><i class="fas fa-paper-plane"></i> Submit Consultation</button>
