@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ValidationError
 from typing import Optional, List, Dict, Any
 from datetime import datetime
 from openai import OpenAI
@@ -89,7 +89,7 @@ class EMR(BaseModel):
 
 
 # ----------------------------
-# Llama API Call Helper
+# Llama API Call
 # ----------------------------
 
 def llama_chat(prompt, temperature=0.1):
@@ -106,20 +106,17 @@ def llama_chat(prompt, temperature=0.1):
 
 
 # ----------------------------
-# Generate Summary From Transcript
+# Generate Summary
 # ----------------------------
 
 def generate_summary_from_transcript(conversation):
 
-    # Remove speaker labels
-    cleaned = re.sub(r"\[speaker_\d+\]:", "", conversation)
-    cleaned = cleaned.strip()
+    cleaned = re.sub(r"\[speaker_\d+\]:", "", conversation).strip()
 
     prompt = f"""
 Create a clear, short, patient-friendly medical summary 
 from this doctor-patient conversation.
 
-Ignore speaker labels.
 Do NOT hallucinate.
 Only use explicitly mentioned information.
 
@@ -131,94 +128,181 @@ CONVERSATION:
 
 
 # ----------------------------
-# Generate EMR From Summary
+# Generate EMR JSON
 # ----------------------------
 
 def generate_emr_from_summary(summary_text):
 
+    empty_schema = EMR().model_dump()
+
     prompt = f"""
 You are a clinical data extraction AI.
 
-From the medical summary below, extract structured data 
-and return JSON in the EXACT schema format.
+Fill the following JSON schema using ONLY information 
+from the summary below.
 
-==============================
-EXTRACTION INSTRUCTIONS
-==============================
-
-PATIENT:
-- patient.name → Extract full name if mentioned.
-- patient.age → Extract numeric age only.
-- patient.gender → Extract if explicitly mentioned.
-
-CHIEF COMPLAINT:
-- Main reason for visit (primary symptom).
-
-HISTORY OF PRESENT ILLNESS:
-- duration → How long symptoms present.
-- location → Where pain/symptom is located.
-- severity_out_of_10 → Numeric value if mentioned.
-- character → Type/description of pain.
-
-REVIEW OF SYSTEMS:
-- gastrointestinal → Symptoms like loose motions, diarrhea, vomiting.
-- Fill other systems only if mentioned.
-
-RULES:
-- If information exists, you MUST fill it.
-- If not mentioned, keep null or empty.
-- Do NOT hallucinate.
+IMPORTANT RULES:
+- Do NOT change structure.
+- Do NOT add new keys.
+- If field not mentioned → keep null or empty list.
 - Return ONLY valid JSON.
 - No explanation.
 - No markdown.
 
-==============================
+JSON SCHEMA TO FILL:
+{json.dumps(empty_schema, indent=2)}
+
 SUMMARY:
 {summary_text}
-==============================
 """
 
-    content = llama_chat(prompt, temperature=0.1)
+    content = llama_chat(prompt, temperature=0)
 
     content = content.replace("```json", "").replace("```", "").strip()
 
-    match = re.search(r"\{.*\}", content, re.DOTALL)
-    if not match:
-        print("Raw output:\n", content)
-        raise ValueError("No valid JSON found.")
+    try:
+        return json.loads(content)
+    except json.JSONDecodeError:
+        print("\n⚠ Raw Model Output:\n", content)
+        raise ValueError("Model did not return valid JSON.")
 
-    return json.loads(match.group(0))
+
+# ----------------------------
+# Field Updater (Doctor Editing)
+# ----------------------------
+
+def update_nested_field(data, field_path, new_value):
+
+    keys = field_path.split(".")
+    current = data
+
+    for key in keys[:-1]:
+        if key not in current:
+            print("❌ Invalid field path.")
+            return data
+        current = current[key]
+
+    final_key = keys[-1]
+
+    # Auto-type conversion
+    if new_value.isdigit():
+        new_value = int(new_value)
+    elif new_value.lower() == "null":
+        new_value = None
+
+    # Handle list fields (comma separated)
+    if isinstance(current.get(final_key), list):
+        new_value = [x.strip() for x in new_value.split(",")]
+
+    current[final_key] = new_value
+    return data
+
 
 # ----------------------------
 # MAIN PIPELINE
 # ----------------------------
-
 def process_pipeline(conversation):
-
-    # STEP 1 → Generate summary
+    # STEP 1 → Summary Approval Loop
     summary = generate_summary_from_transcript(conversation)
 
-    print("\n--- GENERATED SUMMARY ---\n")
-    print(summary)
+    while True:
+        print("\n--- GENERATED SUMMARY ---\n")
+        print(summary)
+        decision = input("\nDo you approve this summary? (yes/no): ").strip().lower()
 
-    decision = input("\nDo you approve this summary? (yes/no): ").strip().lower()
+        if decision == "yes":
+            print("\n✅ Summary Approved.")
+            final_summary = summary
+            break
+        elif decision == "no":
+            correction = input("\nEnter corrections or missing details:\n")
+            refinement_prompt = f"""
+You previously generated this patient summary:
 
-    if decision == "yes":
-        final_summary = summary
-    else:
-        user_edit = input("\nEnter corrections or additional details:\n")
+{summary}
 
-    # Merge original + correction
-        final_summary = summary + " " + user_edit
+The doctor provided the following corrections:
+{correction}
 
-    # STEP 2 → Generate EMR from approved summary
+Generate a corrected, clean, patient-friendly medical summary.
+
+Rules:
+- Use original content + corrections
+- Do NOT hallucinate
+- Keep it concise
+- Return only the updated summary text
+"""
+            summary = llama_chat(refinement_prompt, temperature=0.2)
+        else:
+            print("Please enter 'yes' or 'no'.")
+
+    # STEP 2 → EMR Generation
     extracted_data = generate_emr_from_summary(final_summary)
-
-    # Validate using Pydantic
     emr = EMR(**extracted_data)
     final_emr = emr.model_dump()
 
-    return final_emr
+    # STEP 3 → Doctor Validation Loop
+    while True:
+        doctor_decision = input("\nDoctor, is this EMR correct? (yes/no): ").strip().lower()
+        if doctor_decision == "yes":
+            # Save EMR JSON locally ONLY after doctor confirms
+            output_path = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)),
+                "final_emr_output.json"
+            )
+            with open(output_path, "w", encoding="utf-8") as f:
+                json.dump(final_emr, f, indent=4)
+
+            print(f"\n✅ FINAL EMR JSON saved as: {output_path}")
+            print("\n✅ EMR Finalized.")
+            return final_emr
+
+        elif doctor_decision == "no":
+            print("\nYou can edit fields using dot notation.")
+            print("Examples: patient.name, patient.age, chief_complaint, history_of_present_illness.location")
+            field = input("\nEnter field to update: ").strip()
+            value = input("Enter new value: ").strip()
+
+            updated_emr = update_nested_field(final_emr, field, value)
+
+            try:
+                validated = EMR(**updated_emr)
+                final_emr = validated.model_dump()
+                print("\n✅ EMR updated. Doctor can review again.")
+
+            except ValidationError as e:
+                print("\n❌ Validation error:", e)
+        else:
+            print("Please enter yes or no.")
+
+
+    # ----------------------------
+# LOAD LATEST TRANSCRIPT FROM STAGE 1
+# ----------------------------
+
+def load_latest_transcript(transcript_folder):
+
+    files = [
+        f for f in os.listdir(transcript_folder)
+        if f.startswith("transcript_") and f.endswith(".json")
+    ]
+
+    if not files:
+        raise FileNotFoundError("No transcript files found in outputs folder.")
+
+    # Get most recent file
+    files.sort(reverse=True)
+    latest_file = files[0]
+
+    full_path = os.path.join(transcript_folder, latest_file)
+
+    print(f"\n📄 Loading transcript: {latest_file}")
+
+    with open(full_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    return data.get("plain_text", "")
+
 
 
 # ----------------------------
@@ -226,63 +310,13 @@ def process_pipeline(conversation):
 # ----------------------------
 
 if __name__ == "__main__":
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    transcript_folder = os.path.join(base_dir, "outputs")
 
-    conversation = """
-[speaker_0]: Good   morning.   So   what   seems   to   be   the   problem   today?
-[speaker_1]: Good   morning,   doctor.   I've   been   having   headaches   for   the   past   few   days.
-[speaker_0]: How   long   exactly?
-[speaker_1]: Uh,   about   five   days   now.
-[speaker_0]: Can   you   describe   the   headache?
-[speaker_1]: It's   a   dull,   constant   pain   in   the   back   of   my   head.   It   feels   like   a   pressure.
-[speaker_0]: Okay.   So   is   it   continuous,   or   does   it   come   and   go?
-[speaker_1]: Mostly   continuous,   but   worse   in   the   morning.
-[speaker_0]: Okay,   so   on   a   scale   of   one   to   ten,   how   worse   it   is?
-[speaker_1]: Like   seven.
-[speaker_0]: Do   you   have   any   associated   symptoms   like   nausea,   vomiting,   dizziness,   or   blurred   vision?
-[speaker_1]: Uh,   I've   been   slightly   dizzy   in   the   morning   and   had,   had   mild   nausea.   [chuckles]   No   vomiting,   though.
-[speaker_0]: Uh,   okay,   so   sensitivity   to   so-   light   or   sound?
-[speaker_1]: Yes,   bright   light   bothers   me   when   the   pa-   pain   get   worse...   gets   worse.
-[speaker_0]: Does   anything   trigger   it?
-[speaker_1]: Uh,   long   hours   on   my   laptop   seem   to   make   it   worse.
-[speaker_0]: Anything   that   relieves   it?
-[speaker_1]: Resting   in   the   dark   room   helps.   I   took   a   paracetamol   once.   It   helped   a   little.
-[speaker_0]: So   have   you   had   similar   headaches   before?
-[speaker_1]: Occasionally,   but   not   this   persistent.
-[speaker_0]: Okay,   so   do   you   have   any   fever,   neck   stiffness,   or   recent   infections?
-[speaker_1]: No,   no.
-[speaker_0]: How   long   has   your   sleep   been?
-[speaker_1]: Poor.   I've   been   sleeping   late   due   to   work.
-[speaker_0]: So   tell   me   about   yourself.   What   do   you   do?
-[speaker_1]: So   I'm   a   software   engineer.
-[speaker_0]: How   many-
-[speaker_1]: Like,   I   work   around   ten   to   eleven   hours.
-[speaker_0]: Oh,   okay.   So   are   you   stressed   recently   due   to   your   job?
-[speaker_1]: Yeah,   due   to   deadlines.
-[speaker_0]: Okay.   Uh,   do   you   have   any   medical   conditions   like   blood,   blood   pressure,   diabetes,   or   thyroid   issues?
-[speaker_1]: No   known   conditions.
-[speaker_0]: Okay.   Do   you   take   any   medications?
-[speaker_1]: Just   a   vitamin   D   supplement.
-[speaker_0]: Okay.   Uh,   do   you   have   any   allergies?
-[speaker_1]: None.
-[speaker_0]: Okay.   Uh,   so   do   you   have   any   family   history   issues   like   migraine   or   neurological   problems?
-[speaker_1]: Not   that   I'm   aware   of.
-[speaker_0]: Okay.   From   what   you   describe,   this   appears   to   be   a   consistent   type   of   headache,   likely   aggravated   by   stress   and   prolonged   screen   time.
-[speaker_1]: So   is   it   serious?
-[speaker_0]: It   doesn't   sound   alarming   based   on   your   symptoms,   but   we'll   monitor.   I'll   prescribe   medication   for   relief   and   recommend   some   lifestyle   adjustments,   like   better   sleep,   hydration,   screen   breaks,   and   stress   management.
-[speaker_1]: Okay,   doctor.
-[speaker_0]: If   the   headache   worsens,   becomes   severe   suddenly,   or   you   develop   vomiting,   vision   problems,   or   [chuckles]   weakness,   come   back   immediately.
-[speaker_1]: You're   very   unsympathetic,   doctor.   [chuckles]
-[speaker_0]: Thank   you.
-[speaker_1]: Understood,   but   I   will   not   say   thank   you.
-[speaker_0]: See   you-
-[speaker_1]: You   were   laughing.   [chuckles]
-[speaker_0]: Good   day.
+    conversation = load_latest_transcript(transcript_folder)  # ✅ pass folder
 
-"""
+    if not conversation.strip():
+        raise ValueError("Transcript is empty.")
 
     final_emr = process_pipeline(conversation)
-
-    with open("final_emr_output.json", "w", encoding="utf-8") as f:
-        json.dump(final_emr, f, indent=4)
-
-    print("\n✅ FINAL EMR JSON saved as 'final_emr_output.json'")
+    ...

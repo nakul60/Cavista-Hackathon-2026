@@ -2,22 +2,32 @@
     "patient": {
         "name": "Namish",
         "age": null,
-        "gender": null
+        "gender": null,
+        "occupation": null
     },
     "visit": {
-        "date": "2026-02-21",
+        "date": "2026-02-22",
         "type": "Outpatient Consultation"
     },
-    "chief_complaint": "Headache",
+    "chief_complaint": "Feeling unwell and seeking medical help",
     "history_of_present_illness": {
-        "duration": 5,
-        "location": "back of your head",
+        "duration": null,
+        "location": null,
         "severity_out_of_10": null,
-        "character": "dull, constant, pressure"
+        "character": null,
+        "aggravating_factors": [],
+        "relieving_factors": [],
+        "medications_tried": []
     },
     "review_of_systems": {
-        "gastrointestinal": "mild nausea",
-        "neurological": "dizziness"
+        "constitutional": [],
+        "neurological": [],
+        "cardiovascular": [],
+        "respiratory": [],
+        "gastrointestinal": [],
+        "musculoskeletal": [],
+        "sleep": null,
+        "other": []
     },
     "past_medical_history": {
         "conditions": [],
